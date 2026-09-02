@@ -1,0 +1,43 @@
+# ===== Android / Gradle (frontend) =====
+build/
+.gradle/
+local.properties
+.idea/
+*.iml
+.cxx/
+.externalNativeBuild/
+.kotlin/
+captures/
+
+# APK / signing
+*.apk
+*.aab
+*.jks
+*.keystore
+*.pk8
+*.pem
+
+# ===== Python (backend) =====
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+*.sqlite3
+*.db
+
+# Environment / secrets
+.env
+.env.*
+google-services.json
+
+# ===== OS / editor =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log

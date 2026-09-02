@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base spacing (unfocused/legacy support) -->
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_large">24dp</dimen>
+
+    <!-- Grid & Spacing Palette (Rule Set 2.3) -->
+    <dimen name="spacing2">2dp</dimen>
+    <dimen name="spacing4">4dp</dimen>
+    <dimen name="spacing6">6dp</dimen>
+    <dimen name="spacing8">8dp</dimen>
+    <dimen name="spacing12">12dp</dimen>
+    <dimen name="spacing16">16dp</dimen>     <!-- Default content padding -->
+    <dimen name="spacing20">20dp</dimen>
+    <dimen name="spacing24">24dp</dimen>     <!-- Section spacing -->
+    <dimen name="spacing32">32dp</dimen>
+    <dimen name="spacing40">40dp</dimen>
+    <dimen name="spacing48">48dp</dimen>
+    <dimen name="spacing56">56dp</dimen>
+    <dimen name="spacing64">64dp</dimen>
+
+    <!-- UI Chrome clearance and sizes -->
+    <dimen name="toolbar_height">56dp</dimen>
+    <dimen name="bottom_nav_clearance">80dp</dimen>
+
+    <!-- Corner Radii -->
+    <dimen name="radiusSmall">8dp</dimen>        <!-- Chips, badges, small tags -->
+    <dimen name="radiusMedium">12dp</dimen>      <!-- Creator cards, booking cards -->
+    <dimen name="radiusLarge">16dp</dimen>       <!-- Bottom sheets, dialogs, profile card -->
+    <dimen name="radiusXLarge">24dp</dimen>      <!-- Onboarding image containers -->
+    <dimen name="radiusFull">999dp</dimen>       <!-- Pills, avatar circles, buttons (pill style) -->
+
+    <!-- Avatar Dimensions (Rule Set 8.9) -->
+    <dimen name="avatar_size">64dp</dimen>
+    <dimen name="avatar_micro">24dp</dimen>
+    <dimen name="avatar_small">36dp</dimen>
+    <dimen name="avatar_medium">48dp</dimen>
+    <dimen name="avatar_large">64dp</dimen>
+    <dimen name="avatar_xlarge">88dp</dimen>
+    <dimen name="avatar_hero">120dp</dimen>
+
+    <!-- Typography Scale (Rule Set 2.2 / 3.0) -->
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="text_medium">16sp</dimen>
+    <dimen name="text_large">24sp</dimen>
+    
+    <dimen name="textAppName">38sp</dimen>         <!-- "Capturo" on splash -->
+    <dimen name="textHero">28sp</dimen>            <!-- Onboarding main title -->
+    <dimen name="textScreenTitle">22sp</dimen>     <!-- Screen heading -->
+    <dimen name="textH1">20sp</dimen>              <!-- Card title, Creator name on profile -->
+    <dimen name="textH2">17sp</dimen>              <!-- Section heading -->
+    <dimen name="textH3">15sp</dimen>              <!-- Subsection, card subtitle -->
+    <dimen name="textBody">14sp</dimen>            <!-- Primary body text -->
+    <dimen name="textBodySmall">13sp</dimen>       <!-- Secondary body, descriptions -->
+    <dimen name="textCaption">12sp</dimen>         <!-- Timestamps, metadata -->
+    <dimen name="textMicro">11sp</dimen>           <!-- Badge text, chip labels -->
+    <dimen name="textPrice">18sp</dimen>           <!-- Price value - bold, accent color -->
+    <dimen name="textStat">22sp</dimen>            <!-- Dashboard stats -->
+    <dimen name="textStatLabel">12sp</dimen>       <!-- Stat label below number -->
+    <dimen name="textButtonLarge">15sp</dimen>     <!-- Primary button text -->
+    <dimen name="textButtonSmall">13sp</dimen>     <!-- Secondary / compact button -->
+</resources>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="28dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="18dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Good morning, Arjun 👋"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="21sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Photographer Studio"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/btnSwitchCustomer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_chip_dark"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="8dp"
+                android:text="Customer view"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Stats 2x2 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="18dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_card_premium"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_bold" android:text="340"
+                    android:textColor="@color/colorTextPrimary" android:textSize="22sp" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular" android:text="Total Bookings"
+                    android:textColor="@color/colorTextHint" android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_card_premium"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_bold" android:text="₹6.4L"
+                    android:textColor="@color/colorPrimary" android:textSize="22sp" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular" android:text="Revenue"
+                    android:textColor="@color/colorTextHint" android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_card_premium"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_bold" android:text="12.4k"
+                    android:textColor="@color/colorTextPrimary" android:textSize="22sp" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular" android:text="Profile Views"
+                    android:textColor="@color/colorTextHint" android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_card_premium"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView android:id="@+id/textLikes" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_bold" android:text="8.9k"
+                    android:textColor="@color/colorTextPrimary" android:textSize="22sp" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular" android:text="Portfolio Likes"
+                    android:textColor="@color/colorTextHint" android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btnCreatePost"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_gold_button"
+            android:drawableStart="@drawable/ic_camera"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:paddingHorizontal="20dp"
+            android:text="Create Post — Upload from Gallery"
+            android:textColor="@color/colorTextOnAccent"
+            android:textSize="14sp"
+            app:drawableTint="@color/colorTextOnAccent" />
+
+        <TextView
+            style="@style/PremiumSectionTitle"
+            android:text="Your Portfolio" />
+
+        <TextView
+            android:id="@+id/textEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="6dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="No posts yet. Tap “Create Post” to upload your work from the gallery."
+            android:textColor="@color/colorTextHint"
+            android:textSize="13sp"
+            android:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerPosts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:nestedScrollingEnabled="false"
+            android:paddingHorizontal="16dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="3" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

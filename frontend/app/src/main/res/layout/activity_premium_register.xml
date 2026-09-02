@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
+
+    <!-- Toolbar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="12dp">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/bg_circle_surface"
+            android:padding="10dp"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@color/colorTextPrimary" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Become a Photographer"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Set up your listing so customers can discover and book you."
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="13sp" />
+
+            <TextView style="@style/PremiumSectionTitle" android:text="Full Name" />
+
+            <EditText
+                android:id="@+id/inputName"
+                style="@style/PremiumInputField"
+                android:hint="e.g. Aarav Photography"
+                android:inputType="textPersonName" />
+
+            <TextView style="@style/PremiumSectionTitle" android:text="Mobile Number" />
+
+            <EditText
+                android:id="@+id/inputMobile"
+                style="@style/PremiumInputField"
+                android:hint="10-digit mobile number"
+                android:inputType="phone" />
+
+            <TextView style="@style/PremiumSectionTitle" android:text="Email" />
+
+            <EditText
+                android:id="@+id/inputEmail"
+                style="@style/PremiumInputField"
+                android:hint="you@example.com"
+                android:inputType="textEmailAddress" />
+
+            <TextView style="@style/PremiumSectionTitle" android:text="Price Per Hour (₹)" />
+
+            <EditText
+                android:id="@+id/inputPrice"
+                style="@style/PremiumInputField"
+                android:hint="e.g. 2000"
+                android:inputType="number" />
+
+            <TextView style="@style/PremiumSectionTitle" android:text="Type of Events" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:text="Select all that apply"
+                android:textColor="@color/colorTextHint"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:id="@+id/eventChips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal" />
+
+            <TextView style="@style/PremiumSectionTitle" android:text="Location" />
+
+            <EditText
+                android:id="@+id/inputLocation"
+                style="@style/PremiumInputField"
+                android:hint="e.g. Koramangala, Bengaluru"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@+id/btnUseLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_chip_dark"
+                android:drawablePadding="6dp"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="10dp"
+                android:text="📍 Use my current location"
+                android:textColor="@color/colorPrimary"
+                android:textSize="13sp" />
+
+            <TextView style="@style/PremiumSectionTitle" android:text="Sample Photos" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:text="Upload a few of your best shots for your portfolio"
+                android:textColor="@color/colorTextHint"
+                android:textSize="12sp" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingHorizontal="16dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/imageStrip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/btnAddPhoto"
+                        android:layout_width="96dp"
+                        android:layout_height="96dp"
+                        android:background="@drawable/bg_card_premium"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/ic_camera"
+                            app:tint="@color/colorPrimary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Add"
+                            android:textColor="@color/colorTextSecondary"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/btnPost"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_gold_button"
+        android:fontFamily="@font/poppins_semibold"
+        android:gravity="center"
+        android:text="Post &amp; Go Live"
+        android:textColor="@color/colorTextOnAccent"
+        android:textSize="16sp" />
+</LinearLayout>

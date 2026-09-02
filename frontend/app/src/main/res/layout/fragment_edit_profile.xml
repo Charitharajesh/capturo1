@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_grid_pattern">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/statusBarColor"
+            app:title="Edit Profile"
+            app:titleTextColor="@color/colorTextPrimary" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Full Name -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_name"
+                style="@style/Widget.Capturo.TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Full Name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Phone Number -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_phone"
+                style="@style/Widget.Capturo.TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Phone Number">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:inputType="phone"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Bio (Only for creators) -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_bio"
+                style="@style/Widget.Capturo.TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Professional Bio">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_bio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top|start"
+                    android:inputType="textMultiLine"
+                    android:lines="4"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Creator Specific Layout container -->
+            <LinearLayout
+                android:id="@+id/layoutCreatorDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <!-- Hourly Rate & Minimum Hours Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_hourly_rate"
+                        style="@style/Widget.Capturo.TextInputLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:hint="Hourly Rate (₹)">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_hourly_rate"
+                            android:layout_width="match_parent"
+                            android:layout_height="52dp"
+                            android:inputType="numberDecimal"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_min_hours"
+                        style="@style/Widget.Capturo.TextInputLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:hint="Min Hours">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_min_hours"
+                            android:layout_width="match_parent"
+                            android:layout_height="52dp"
+                            android:inputType="number"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <!-- Experience & Radius -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_experience"
+                        style="@style/Widget.Capturo.TextInputLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:hint="Years Experience">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_experience"
+                            android:layout_width="match_parent"
+                            android:layout_height="52dp"
+                            android:inputType="number"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_radius"
+                        style="@style/Widget.Capturo.TextInputLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:hint="Radius (km)">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_radius"
+                            android:layout_width="match_parent"
+                            android:layout_height="52dp"
+                            android:inputType="number"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <!-- Specializations Chip Label -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Specializations"
+                    android:textColor="@color/colorTextSecondary"
+                    android:textSize="14sp" />
+
+                <!-- Specialization Chip Group -->
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/cg_specializations"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:chipSpacingHorizontal="8dp"
+                    app:chipSpacingVertical="4dp"
+                    app:singleSelection="false">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_wedding"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Wedding"
+                        android:textColor="@color/colorTextPrimary"
+                        app:chipBackgroundColor="@color/colorSurfaceVariant" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_portrait"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Portrait"
+                        android:textColor="@color/colorTextPrimary"
+                        app:chipBackgroundColor="@color/colorSurfaceVariant" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_corporate"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Corporate"
+                        android:textColor="@color/colorTextPrimary"
+                        app:chipBackgroundColor="@color/colorSurfaceVariant" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_sports"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sports"
+                        android:textColor="@color/colorTextPrimary"
+                        app:chipBackgroundColor="@color/colorSurfaceVariant" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_events"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Events"
+                        android:textColor="@color/colorTextPrimary"
+                        app:chipBackgroundColor="@color/colorSurfaceVariant" />
+                </com.google.android.material.chip.ChipGroup>
+            </LinearLayout>
+
+            <!-- Live Preview Section (Creator Only) -->
+            <LinearLayout
+                android:id="@+id/layoutLivePreviewContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Live Preview"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="This is how attendees will see your card in search results."
+                    android:textColor="@color/colorTextSecondary"
+                    android:textSize="13sp" />
+
+                <!-- The nested card layout uses a negative margin by default for list items, so we pad it out slightly -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="-16dp">
+                    
+                    <include
+                        android:id="@+id/livePreviewCard"
+                        layout="@layout/item_creator_card" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <!-- Save Button -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_save"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/bg_button_gradient"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Save Changes"
+                android:textColor="@color/colorTextOnAccent"
+                android:textSize="15sp"
+                android:textAllCaps="false" />
+
+            <!-- Progress Bar -->
+            <ProgressBar
+                android:id="@+id/progress_saving"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:indeterminateTint="@color/colorAccent"
+                android:visibility="gone" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

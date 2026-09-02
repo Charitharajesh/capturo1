@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorSurface"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <!-- Handle Bar -->
+    <View
+        android:layout_width="32dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:background="@color/colorPrimaryContainer" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Decline Booking Request"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Please select a reason for declining this booking request:"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="13sp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Radio Group Reasons -->
+    <RadioGroup
+        android:id="@+id/rgReasons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+
+        <RadioButton
+            android:id="@+id/rbConflict"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorAccent"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Schedule conflict"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:padding="8dp" />
+
+        <RadioButton
+            android:id="@+id/rbRadius"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorAccent"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Outside service area"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:padding="8dp" />
+
+        <RadioButton
+            android:id="@+id/rbUnavailable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorAccent"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Not available"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:padding="8dp" />
+
+        <RadioButton
+            android:id="@+id/rbOther"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorAccent"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Other"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:padding="8dp" />
+    </RadioGroup>
+
+    <!-- Custom Reason Input -->
+    <EditText
+        android:id="@+id/etOtherReason"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_input_field"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Explain why (optional)..."
+        android:textColorHint="@color/colorTextHint"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:padding="12dp"
+        android:minLines="2"
+        android:gravity="top|start"
+        android:visibility="gone"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Button Actions -->
+    <FrameLayout
+        android:id="@+id/btnDeclineConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_button_gradient"
+        android:clickable="true"
+        android:focusable="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Decline Booking"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </FrameLayout>
+
+</LinearLayout>

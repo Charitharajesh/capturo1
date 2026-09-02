@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="Theme.Capturo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand colors. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+        <item name="colorOnPrimary">@color/colorTextOnAccent</item>
+        
+        <!-- Secondary colors. -->
+        <item name="colorSecondary">@color/colorAccent</item>
+        <item name="colorSecondaryVariant">@color/colorAccentDark</item>
+        <item name="colorOnSecondary">@color/colorTextOnAccent</item>
+
+        <!-- Status bar and system bars styling (Edge-to-Edge Contract) -->
+        <item name="android:windowBackground">@drawable/bg_grid_pattern</item>
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:navigationBarColor">@color/colorBottomNav</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        
+        <!-- Fonts & styles custom defaults -->
+        <item name="android:textColorPrimary">@color/colorTextPrimary</item>
+        <item name="android:textColorSecondary">@color/colorTextSecondary</item>
+        
+        <!-- Snackbar Styles -->
+        <item name="snackbarStyle">@style/Widget.Capturo.Snackbar</item>
+        <item name="snackbarTextViewStyle">@style/Widget.Capturo.SnackbarTextView</item>
+    </style>
+
+    <!-- Splash Screen Starting Theme -->
+    <style name="Theme.Capturo.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/colorBackground</item>
+        <item name="postSplashScreenTheme">@style/Theme.Capturo.Premium</item>
+    </style>
+
+    <!-- Premium demo flow theme: solid luxury-dark window, edge-to-edge bars -->
+    <style name="Theme.Capturo.Premium" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+        <item name="colorOnPrimary">@color/colorTextOnAccent</item>
+        <item name="colorSecondary">@color/colorAccent</item>
+        <item name="colorSecondaryVariant">@color/colorAccentDark</item>
+        <item name="colorOnSecondary">@color/colorTextOnAccent</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/colorBottomNav</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:textColorPrimary">@color/colorTextPrimary</item>
+        <item name="android:textColorSecondary">@color/colorTextSecondary</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <!-- Premium fullscreen dialog (image viewer) -->
+    <style name="Theme.Capturo.Premium.Fullscreen" parent="Theme.Capturo.Premium">
+        <item name="android:windowBackground">@color/black</item>
+    </style>
+</resources>

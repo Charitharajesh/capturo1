@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_screen">
+
+    <!-- Radial glow behind camera animation -->
+    <View
+        android:id="@+id/glowView"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:alpha="0"
+        android:background="@drawable/bg_lottie_glow"
+        app:layout_constraintBottom_toTopOf="@+id/textAppName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_bias="0.45" />
+
+    <!-- Lottie camera animation -->
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieCamera"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        app:lottie_rawRes="@raw/lottie_camera"
+        app:lottie_autoPlay="false"
+        app:lottie_loop="false"
+        app:layout_constraintBottom_toBottomOf="@+id/glowView"
+        app:layout_constraintEnd_toEndOf="@+id/glowView"
+        app:layout_constraintStart_toStartOf="@+id/glowView"
+        app:layout_constraintTop_toTopOf="@+id/glowView" />
+
+    <!-- App Title TextView -->
+    <TextView
+        android:id="@+id/textAppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:alpha="0"
+        android:text="Capturo"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="40sp"
+        android:fontFamily="@font/poppins_bold"
+        android:textStyle="bold"
+        android:letterSpacing="0.06"
+        app:layout_constraintBottom_toTopOf="@+id/textTagline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/glowView" />
+
+    <!-- Tagline TextView -->
+    <TextView
+        android:id="@+id/textTagline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:alpha="0"
+        android:text="Capture Moments. Create Memories."
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_regular"
+        android:letterSpacing="0.02"
+        app:layout_constraintBottom_toTopOf="@+id/textPoweredBy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textAppName" />
+
+    <!-- Bottom branding line -->
+    <TextView
+        android:id="@+id/textPoweredBy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:text="Your Photography. Elevated."
+        android:textColor="@color/colorTextHint"
+        android:textSize="12sp"
+        android:fontFamily="@font/poppins_regular"
+        android:letterSpacing="0.1"
+        android:layout_marginBottom="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <ImageView
+        android:id="@+id/imageLogo"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:contentDescription="CAPTURO"
+        android:src="@drawable/capturo_logo" />
+
+    <TextView
+        android:id="@+id/textPoweredBy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="44dp"
+        android:alpha="0"
+        android:fontFamily="@font/poppins_medium"
+        android:letterSpacing="0.3"
+        android:text="PREMIUM PHOTOGRAPHY MARKETPLACE"
+        android:textColor="@color/colorTextHint"
+        android:textSize="9sp" />
+</FrameLayout>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:name=".CapturoApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/capturo_logo"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/capturo_logo"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Capturo"
+        android:usesCleartextTraffic="true">
+
+        <!-- ===== CAPTURO Premium experience (backend-hydrated) — APP LAUNCHER ===== -->
+        <activity
+            android:name=".premium.PremiumSplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Capturo.Starting">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".premium.PremiumOnboardingActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Capturo" />
+
+        <activity
+            android:name=".premium.PremiumAuthActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Capturo" />
+
+        <activity
+            android:name=".premium.PremiumMainActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.Capturo" />
+
+        <activity
+            android:name=".premium.PremiumProfileActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Capturo" />
+
+        <activity
+            android:name=".premium.PremiumImageViewerActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Capturo" />
+
+        <activity
+            android:name=".premium.PremiumBookingActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.Capturo" />
+
+        <activity
+            android:name=".premium.PremiumPaymentActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Capturo" />
+
+        <activity
+            android:name=".premium.PremiumConfirmationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Capturo" />
+
+        <activity
+            android:name=".premium.PremiumSearchActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.Capturo" />
+
+        <activity
+            android:name=".premium.PremiumChatActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.Capturo" />
+
+        <activity
+            android:name=".premium.PremiumDashboardActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Capturo" />
+
+        <activity
+            android:name=".premium.PremiumRegisterActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.Capturo" />
+
+        <activity
+            android:name=".premium.PremiumSavedActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Capturo" />
+
+        <activity
+            android:name=".premium.PremiumConversationsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Capturo" />
+
+        <activity
+            android:name=".premium.PremiumInfoActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Capturo" />
+
+        <!-- Real backend-connected splash — kept available, not the launcher -->
+        <activity
+            android:name=".ui.splash.SplashActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Capturo.Starting" />
+
+        <!-- Main Home Dashboard -->
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.Capturo" />
+
+        <!-- Authentication Activities -->
+        <activity
+            android:name=".ui.auth.LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Capturo" />
+
+        <activity
+            android:name=".ui.auth.RegisterActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Capturo" />
+
+        <activity
+            android:name=".ui.auth.RoleSelectionActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Capturo" />
+
+        <activity
+            android:name=".ui.auth.ForgotPasswordActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Capturo" />
+
+        <activity
+            android:name=".ui.auth.VerifyOtpActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Capturo" />
+
+        <activity
+            android:name=".ui.auth.ResetPasswordActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Capturo" />
+
+        <!-- Onboarding Screen -->
+        <activity
+            android:name=".ui.onboarding.OnboardingActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Capturo" />
+
+        <!-- FileProvider for opening downloaded PDF files -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+    </application>
+
+</manifest>

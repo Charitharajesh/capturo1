@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_screen"
+    android:padding="24dp">
+
+    <!-- Header Title -->
+    <TextView
+        android:id="@+id/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="Choose Your Role"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="24sp"
+        android:fontFamily="@font/poppins_bold"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Header Subtitle -->
+    <TextView
+        android:id="@+id/textSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Select how you want to use Capturo"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_regular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textTitle" />
+
+    <!-- Role Card: Event Attendee -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardAttendee"
+        android:layout_width="0dp"
+        android:layout_height="156dp"
+        android:layout_marginTop="48dp"
+        app:cardBackgroundColor="@color/colorSurface"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        app:strokeColor="@color/colorBorder"
+        app:strokeWidth="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textSubtitle">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Left Accent Strip -->
+            <View
+                android:id="@+id/stripAttendee"
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_accent_strip"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Icon -->
+            <ImageView
+                android:id="@+id/iconAttendee"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_profile"
+                app:tint="@color/colorPrimaryLight"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/stripAttendee"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Text Content Container -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/chevronAttendee"
+                app:layout_constraintStart_toEndOf="@id/iconAttendee"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Event Attendee"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="17sp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Book verified photographers and receive professional media instantly."
+                    android:textColor="@color/colorTextSecondary"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:maxLines="2" />
+            </LinearLayout>
+
+            <!-- Chevron Right -->
+            <ImageView
+                android:id="@+id/chevronAttendee"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_chevron_right"
+                app:tint="@color/colorTextDisabled"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Role Card: Content Creator -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardCreator"
+        android:layout_width="0dp"
+        android:layout_height="156dp"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="@color/colorSurface"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        app:strokeColor="@color/colorBorder"
+        app:strokeWidth="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardAttendee">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Left Accent Strip -->
+            <View
+                android:id="@+id/stripCreator"
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_accent_strip"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Icon -->
+            <ImageView
+                android:id="@+id/iconCreator"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_camera"
+                app:tint="@color/colorPrimaryLight"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/stripCreator"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Text Content Container -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/chevronCreator"
+                app:layout_constraintStart_toEndOf="@id/iconCreator"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Content Creator"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="17sp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Offer your photography services, manage bookings, and deliver media."
+                    android:textColor="@color/colorTextSecondary"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:maxLines="2" />
+            </LinearLayout>
+
+            <!-- Chevron Right -->
+            <ImageView
+                android:id="@+id/chevronCreator"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_chevron_right"
+                app:tint="@color/colorTextDisabled"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Bottom Note Text -->
+    <TextView
+        android:id="@+id/textNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="You can switch roles anytime in settings"
+        android:textColor="@color/colorTextHint"
+        android:textSize="12sp"
+        android:fontFamily="@font/poppins_regular"
+        app:layout_constraintBottom_toTopOf="@id/btnContinue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Continue Button -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnContinue"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/bg_button_gradient"
+        android:text="Continue"
+        android:textColor="@color/colorTextOnAccent"
+        android:textSize="15sp"
+        android:fontFamily="@font/poppins_bold"
+        android:textAllCaps="false"
+        android:enabled="false"
+        android:alpha="0.5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

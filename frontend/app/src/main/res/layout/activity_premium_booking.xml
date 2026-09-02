@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
+
+    <!-- Toolbar -->
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="12dp">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/bg_circle_surface"
+            android:padding="10dp"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@color/colorTextPrimary" />
+
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Book Photographer"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
+
+            <TextView style="@style/PremiumSectionTitle" android:text="Select Event" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingHorizontal="20dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/eventChips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+
+            <TextView style="@style/PremiumSectionTitle" android:text="Select Date" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingHorizontal="20dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/dateChips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+
+            <TextView style="@style/PremiumSectionTitle" android:text="Select Time Slot" />
+
+            <LinearLayout
+                android:id="@+id/slotContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp" />
+
+            <TextView style="@style/PremiumSectionTitle" android:text="Select Package" />
+
+            <LinearLayout
+                android:id="@+id/packageContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp" />
+
+            <TextView style="@style/PremiumSectionTitle" android:text="Event Location" />
+
+            <EditText
+                android:id="@+id/inputLocation"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_pill_dark"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Enter event location"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:paddingHorizontal="18dp"
+                android:textColor="@color/colorTextPrimary"
+                android:textColorHint="@color/colorTextHint"
+                android:textSize="14sp" />
+
+            <!-- Summary -->
+            <TextView style="@style/PremiumSectionTitle" android:text="Booking Summary" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_card_premium"
+                android:orientation="vertical"
+                android:padding="18dp">
+
+                <include
+                    android:id="@+id/rowPhotographer"
+                    layout="@layout/item_premium_summary_row" />
+
+                <include
+                    android:id="@+id/rowEvent"
+                    layout="@layout/item_premium_summary_row" />
+
+                <include
+                    android:id="@+id/rowDate"
+                    layout="@layout/item_premium_summary_row" />
+
+                <include
+                    android:id="@+id/rowTime"
+                    layout="@layout/item_premium_summary_row" />
+
+                <include
+                    android:id="@+id/rowLocation"
+                    layout="@layout/item_premium_summary_row" />
+
+                <include
+                    android:id="@+id/rowPackage"
+                    layout="@layout/item_premium_summary_row" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="12dp"
+                    android:background="@color/colorDivider" />
+
+                <include
+                    android:id="@+id/rowPrice"
+                    layout="@layout/item_premium_summary_row" />
+
+                <include
+                    android:id="@+id/rowFee"
+                    layout="@layout/item_premium_summary_row" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Total"
+                        android:textColor="@color/colorTextPrimary"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/textTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="₹0"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Bottom CTA -->
+    <TextView
+        android:id="@+id/btnContinue"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/bg_gold_button"
+        android:fontFamily="@font/poppins_semibold"
+        android:gravity="center"
+        android:text="Continue to Payment"
+        android:textColor="@color/colorTextOnAccent"
+        android:textSize="16sp" />
+</LinearLayout>

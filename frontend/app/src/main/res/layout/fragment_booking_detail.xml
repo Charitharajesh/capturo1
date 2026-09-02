@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_grid_pattern"
+    tools:context=".ui.booking.BookingDetailFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/statusBarColor"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:title="Booking Details"
+            app:titleTextColor="@color/colorTextPrimary" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="96dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Status Banner Top Header -->
+            <LinearLayout
+                android:id="@+id/layoutStatusBanner"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@color/colorWarningBg"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp">
+
+                <ImageView
+                    android:id="@+id/imageStatusIcon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@android:drawable/presence_online"
+                    app:tint="@color/colorWarning" />
+
+                <TextView
+                    android:id="@+id/textStatusBannerMessage"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Booking is Pending Confirmation"
+                    android:textColor="@color/colorWarning"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- Creator Mini Profile Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:cardBackgroundColor="@color/colorSurface"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/colorBorder"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Profile Info Row -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/imageAvatar"
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_profile"
+                            app:shapeAppearanceOverlay="@style/ShapeAppearance.Capturo.Circular"
+                            app:strokeColor="@color/colorBorder"
+                            app:strokeWidth="1.5dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="16dp"
+                            android:layout_toEndOf="@id/imageAvatar"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textCreatorName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_bold"
+                                android:text="Sarah Johnson"
+                                android:textColor="@color/colorTextPrimary"
+                                android:textSize="16sp"
+                                android:maxLines="1"
+                                android:ellipsize="end" />
+
+                            <TextView
+                                android:id="@+id/textSpecialty"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/poppins_regular"
+                                android:text="Wedding Photographer"
+                                android:textColor="@color/colorTextSecondary"
+                                android:textSize="13sp"
+                                android:maxLines="1"
+                                android:ellipsize="end" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <!-- Divider -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="16dp"
+                        android:background="@color/colorDivider" />
+
+                    <!-- Action Buttons (Chat & Call) in separate grid/horizontal row -->
+                    <LinearLayout
+                        android:id="@+id/actionButtonsContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/buttonChat"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:text="CHAT"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="13sp"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            app:strokeColor="@color/colorAccent"
+                            app:strokeWidth="1.2dp"
+                            app:cornerRadius="12dp"
+                            app:icon="@drawable/ic_messages"
+                            app:iconTint="@color/colorAccent"
+                            app:iconSize="18dp"
+                            app:iconGravity="textStart" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/buttonCall"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:text="CALL"
+                            android:textColor="@color/colorOnlineStatus"
+                            android:textSize="13sp"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            app:strokeColor="@color/colorOnlineStatus"
+                            app:strokeWidth="1.2dp"
+                            app:cornerRadius="12dp"
+                            app:icon="@drawable/ic_call"
+                            app:iconTint="@color/colorOnlineStatus"
+                            app:iconSize="18dp"
+                            app:iconGravity="textStart" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Event Details Information Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/colorSurfaceVariant"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/colorBorder"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Detail Row 1: Event Type -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@android:drawable/ic_menu_agenda"
+                            app:tint="@color/colorTextSecondary" />
+
+                        <TextView
+                            android:id="@+id/textEventType"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="Wedding Photography"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginVertical="12dp"
+                        android:background="@color/colorDivider" />
+
+                    <!-- Detail Row 2: Date & Time -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@android:drawable/ic_menu_my_calendar"
+                            app:tint="@color/colorTextSecondary" />
+
+                        <TextView
+                            android:id="@+id/textDateTimeDetails"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Apr 30, 2026 | 2:00 PM – 4:00 PM (2 hours)"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginVertical="12dp"
+                        android:background="@color/colorDivider" />
+
+                    <!-- Detail Row 3: Location -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@android:drawable/ic_menu_directions"
+                            app:tint="@color/colorTextSecondary" />
+
+                        <TextView
+                            android:id="@+id/textLocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Grand Palace Hall, Delhi"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginVertical="12dp"
+                        android:background="@color/colorDivider" />
+
+                    <!-- Detail Row 4: Pricing -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@android:drawable/ic_menu_compass"
+                            app:tint="@color/colorTextSecondary" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_regular"
+                                android:text="Total Amount"
+                                android:textColor="@color/colorTextSecondary"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/textTotalAmount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:fontFamily="@font/poppins_bold"
+                                android:text="₹3,998"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="16sp" />
+                        </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Invoice Row (Only visible if status completed) -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardInvoice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/colorSurface"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeColor="@color/colorBorder"
+                app:strokeWidth="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/imageReceipt"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_payments"
+                        app:tint="@color/colorAccent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="12dp"
+                        android:layout_toEndOf="@id/imageReceipt"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Booking Invoice Receipt"
+                        android:textColor="@color/colorTextPrimary"
+                        android:textSize="14sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/buttonDownloadInvoice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:backgroundTint="@color/colorAccent"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Download"
+                        android:textColor="@color/colorTextOnAccent"
+                        android:textSize="11sp"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="0dp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        app:cornerRadius="18dp" />
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Bottom Sticky Status-based CTA Actions -->
+    <FrameLayout
+        android:id="@+id/layoutBottomCta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@android:color/transparent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Primary Action Button (e.g. Leave Review / View Delivery) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonPrimaryAction"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="View Delivery"
+                android:textColor="@color/colorTextPrimary"
+                android:visibility="gone"
+                app:cornerRadius="12dp" />
+
+            <!-- Complete Booking Button (For Creator if Confirmed) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonCompleteBooking"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/colorSuccess"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Mark as Completed"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                app:cornerRadius="12dp"
+                app:icon="@drawable/ic_check_circle"
+                app:iconTint="@color/white" />
+
+            <!-- Review Button (For Attendee if Confirmed) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonLeaveReview"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/colorWarning"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Leave Review"
+                android:textColor="@color/colorSurfaceVariant"
+                android:visibility="gone"
+                app:cornerRadius="12dp"
+                app:icon="@drawable/ic_star"
+                app:iconTint="@color/colorSurfaceVariant" />
+
+            <!-- Cancel Button (Ghost red) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonCancelBooking"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Cancel Booking"
+                android:textColor="@color/colorError"
+                app:strokeColor="@color/colorError"
+                app:cornerRadius="12dp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

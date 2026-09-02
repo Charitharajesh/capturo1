@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Capturo</string>
+    <string name="welcome_greeting">Welcome to Capturo</string>
+    <string name="tagline">Capture Moments. Book Memories.</string>
+    <string name="brand_subtitle">Your moments deserve to be captured beautifully.</string>
+    <string name="primary_cta">Find Your Photographer</string>
+    <string name="secondary_cta">Try a Photographer</string>
+</resources>

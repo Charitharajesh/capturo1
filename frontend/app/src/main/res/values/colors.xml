@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ===== CAPTURO — Luxury Black + Gold palette ===== -->
+
+    <!-- Backgrounds -->
+    <color name="colorBackground">#0B0B0D</color>           <!-- Deepest charcoal-black -->
+    <color name="colorSurface">#141416</color>              <!-- Card / sheet surface -->
+    <color name="colorSurfaceVariant">#1C1C1F</color>       <!-- Elevated card -->
+    <color name="colorSurfaceElevated">#242428</color>      <!-- Highest surface (dialogs) -->
+
+    <!-- Brand Gold -->
+    <color name="colorPrimary">#C9A24B</color>              <!-- Primary soft gold -->
+    <color name="colorPrimaryDark">#A6822F</color>          <!-- Pressed / darker -->
+    <color name="colorPrimaryLight">#E4C878</color>         <!-- Lighter gold -->
+    <color name="colorPrimaryContainer">#2A2416</color>     <!-- Soft gold container -->
+
+    <!-- Accent Gold -->
+    <color name="colorAccent">#D4AF37</color>               <!-- Rich gold — CTAs, active -->
+    <color name="colorAccentDark">#B8912A</color>           <!-- Pressed accent -->
+    <color name="colorAccentSoft">#EBD9A0</color>           <!-- Warm beige text on dark -->
+    <color name="colorAccentGlow">#D4AF3733</color>         <!-- Glow overlay (20%) -->
+
+    <!-- Gradient colors -->
+    <color name="colorGradientStart">#E4C878</color>        <!-- Button gradient start (light gold) -->
+    <color name="colorGradientEnd">#C9A24B</color>          <!-- Button gradient end (gold) -->
+    <color name="colorGradientCard1">#1C1C1F</color>        <!-- Card gradient top -->
+    <color name="colorGradientCard2">#121214</color>        <!-- Card gradient bottom -->
+
+    <!-- Text Colors -->
+    <color name="colorTextPrimary">#FFFFFF</color>          <!-- Headings -->
+    <color name="colorTextSecondary">#B8B8BD</color>        <!-- Subtitles -->
+    <color name="colorTextHint">#7A7A80</color>             <!-- Placeholder -->
+    <color name="colorTextDisabled">#4A4A50</color>         <!-- Disabled -->
+    <color name="colorTextOnAccent">#0B0B0D</color>         <!-- Dark text on gold button -->
+
+    <!-- Semantic Colors -->
+    <color name="colorSuccess">#4ADE80</color>              <!-- Confirmed / available -->
+    <color name="colorSuccessBg">#4ADE8018</color>
+    <color name="colorWarning">#FBBF24</color>              <!-- Few slots left -->
+    <color name="colorWarningBg">#FBBF2418</color>
+    <color name="colorError">#F87171</color>                <!-- Booked / cancelled -->
+    <color name="colorErrorBg">#F8717118</color>
+    <color name="colorInfo">#60A5FA</color>
+    <color name="colorInfoBg">#60A5FA18</color>
+
+    <!-- UI Chrome -->
+    <color name="colorDivider">#26262A</color>
+    <color name="colorBorder">#2E2E33</color>
+    <color name="colorBorderActive">#C9A24B</color>
+    <color name="colorRipple">#D4AF3733</color>
+    <color name="colorOnlineStatus">#4ADE80</color>
+    <color name="colorStar">#D4AF37</color>
+    <color name="colorStarEmpty">#3A3A40</color>
+    <color name="colorBottomNav">#0E0E10</color>
+    <color name="colorBottomNavIndicator">#2A2416</color>
+    <color name="statusBarColor">#0B0B0D</color>
+    <color name="navigationBarColor">#0E0E10</color>
+
+    <!-- Legacy / Layout Compatibility Aliases -->
+    <color name="gradient_start">#E4C878</color>
+    <color name="gradient_end">#C9A24B</color>
+    <color name="card_surface">#141416</color>
+    <color name="border_card">#2E2E33</color>
+    <color name="card_elevated">#1C1C1F</color>
+    <color name="border_active">#C9A24B</color>
+    <color name="color_accent">#D4AF37</color>
+    <color name="nav_item_color">#B8B8BD</color>
+    <color name="bg_screen">#0B0B0D</color>
+    <color name="text_secondary">#B8B8BD</color>
+    <color name="text_hint">#7A7A80</color>
+
+    <!-- Utilities -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- Premium extras -->
+    <color name="premiumScrim">#B3000000</color>
+    <color name="premiumScrimSoft">#66000000</color>
+    <color name="premiumBeige">#EBD9A0</color>
+</resources>

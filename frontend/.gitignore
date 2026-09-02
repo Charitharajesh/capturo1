@@ -1,0 +1,39 @@
+# Built variants and outputs
+/build
+capture/
+output.json
+
+# Gradle files
+.gradle/
+build/
+local.properties
+
+# Android Studio / IntelliJ IDEA files
+.idea/
+*.iml
+*.ipr
+*.iws
+.navigation/
+
+# Ndks
+.externalNativeBuild/
+.cxx/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Signing files
+*.jks
+*.keystore
+*.pk8
+*.pem
+
+# Local configuration files
+google-services.json
+
+# Logcat logs
+*.log
+
+# Caches
+.kotlin/
