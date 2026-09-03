@@ -3,6 +3,7 @@ package com.capturo.app.premium
 import android.content.Context
 import org.json.JSONArray
 import org.json.JSONObject
+import java.security.MessageDigest
 
 /**
  * Lightweight SharedPreferences-backed persistence for the self-contained
@@ -17,6 +18,10 @@ object PremiumStore {
     private const val KEY_CHAT_IDS = "chat_ids"
     private const val KEY_POSTS = "created_posts"
     private const val KEY_MY_PHOTOGRAPHER = "my_photographer"
+    private const val KEY_ACCOUNTS = "accounts"
+    private const val KEY_SESSION_EMAIL = "session_email"
+    private const val KEY_PAYMENTS = "payments"
+    private const val KEY_PAYMENTS_SEEDED = "payments_seeded"
 
     private fun prefs(ctx: Context) =
         ctx.applicationContext.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
@@ -45,6 +50,128 @@ object PremiumStore {
 
     fun setPhotographerMode(ctx: Context, on: Boolean) =
         prefs(ctx).edit().putBoolean(KEY_MODE_PHOTOGRAPHER, on).apply()
+
+    // ---------- Accounts (on-device local database) ----------
+    data class Account(val name: String, val email: String)
+
+    private fun sha256(s: String): String =
+        MessageDigest.getInstance("SHA-256").digest(s.toByteArray())
+            .joinToString("") { "%02x".format(it) }
+
+    private fun accountsJson(ctx: Context): JSONArray {
+        val raw = prefs(ctx).getString(KEY_ACCOUNTS, "[]") ?: "[]"
+        return runCatching { JSONArray(raw) }.getOrDefault(JSONArray())
+    }
+
+    private fun findAccount(ctx: Context, email: String): JSONObject? {
+        val arr = accountsJson(ctx)
+        val target = email.trim().lowercase()
+        for (i in 0 until arr.length()) {
+            val o = arr.getJSONObject(i)
+            if (o.optString("email").lowercase() == target) return o
+        }
+        return null
+    }
+
+    /** Creates an account. Returns null on success, or an error message. */
+    fun register(ctx: Context, name: String, email: String, password: String): String? {
+        val cleanName = name.trim()
+        val cleanEmail = email.trim().lowercase()
+        if (cleanName.isEmpty()) return "Please enter your full name"
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(cleanEmail).matches())
+            return "Please enter a valid email address"
+        if (password.length < 6) return "Password must be at least 6 characters"
+        if (findAccount(ctx, cleanEmail) != null) return "An account with this email already exists"
+
+        val arr = accountsJson(ctx)
+        arr.put(
+            JSONObject().put("name", cleanName).put("email", cleanEmail)
+                .put("pass", sha256(password))
+        )
+        prefs(ctx).edit()
+            .putString(KEY_ACCOUNTS, arr.toString())
+            .putString(KEY_SESSION_EMAIL, cleanEmail)
+            .apply()
+        return null
+    }
+
+    /** Signs in an existing account. Returns null on success, or an error message. */
+    fun login(ctx: Context, email: String, password: String): String? {
+        val cleanEmail = email.trim().lowercase()
+        val account = findAccount(ctx, cleanEmail)
+            ?: return "No account found for this email. Please sign up first."
+        if (account.optString("pass") != sha256(password))
+            return "Incorrect password. Please try again."
+        prefs(ctx).edit().putString(KEY_SESSION_EMAIL, cleanEmail).apply()
+        return null
+    }
+
+    fun currentAccount(ctx: Context): Account? {
+        val email = prefs(ctx).getString(KEY_SESSION_EMAIL, null) ?: return null
+        val o = findAccount(ctx, email) ?: return null
+        return Account(o.optString("name").ifBlank { "Capturo User" }, o.optString("email"))
+    }
+
+    fun isLoggedIn(ctx: Context) = currentAccount(ctx) != null
+
+    fun logout(ctx: Context) =
+        prefs(ctx).edit().remove(KEY_SESSION_EMAIL).apply()
+
+    // ---------- Payment history ----------
+    data class PaymentRecord(
+        val id: String,
+        val photographer: String,
+        val event: String,
+        val date: String,
+        val method: String,
+        val amount: Int,
+        val ts: Long
+    )
+
+    private fun paymentFromJson(o: JSONObject) = PaymentRecord(
+        id = o.optString("id"),
+        photographer = o.optString("photographer"),
+        event = o.optString("event"),
+        date = o.optString("date"),
+        method = o.optString("method"),
+        amount = o.optInt("amount"),
+        ts = o.optLong("ts")
+    )
+
+    private fun paymentToJson(p: PaymentRecord) = JSONObject()
+        .put("id", p.id).put("photographer", p.photographer).put("event", p.event)
+        .put("date", p.date).put("method", p.method).put("amount", p.amount).put("ts", p.ts)
+
+    /** Returns payment history, newest first. Seeds a few demo entries on first use. */
+    fun payments(ctx: Context): List<PaymentRecord> {
+        if (!prefs(ctx).getBoolean(KEY_PAYMENTS_SEEDED, false)) {
+            val now = System.currentTimeMillis()
+            val day = 86_400_000L
+            val seed = listOf(
+                PaymentRecord("CAP-4821", "Ananya Rao", "Wedding Photography", "12 Aug 2025", "UPI", 45000, now - 6 * day),
+                PaymentRecord("CAP-3910", "Vikram Shetty", "Pre-Wedding Shoot", "28 Jul 2025", "Google Pay", 18000, now - 20 * day),
+                PaymentRecord("CAP-2765", "Meera Nair", "Birthday Event", "05 Jul 2025", "Credit / Debit Card", 9500, now - 40 * day)
+            )
+            val arr = JSONArray()
+            seed.forEach { arr.put(paymentToJson(it)) }
+            prefs(ctx).edit()
+                .putString(KEY_PAYMENTS, arr.toString())
+                .putBoolean(KEY_PAYMENTS_SEEDED, true)
+                .apply()
+        }
+        val raw = prefs(ctx).getString(KEY_PAYMENTS, "[]") ?: "[]"
+        val arr = runCatching { JSONArray(raw) }.getOrDefault(JSONArray())
+        return (0 until arr.length()).map { paymentFromJson(arr.getJSONObject(it)) }
+            .sortedByDescending { it.ts }
+    }
+
+    fun addPayment(ctx: Context, record: PaymentRecord) {
+        payments(ctx) // ensure seeded before we append
+        val raw = prefs(ctx).getString(KEY_PAYMENTS, "[]") ?: "[]"
+        val arr = runCatching { JSONArray(raw) }.getOrDefault(JSONArray())
+        arr.put(paymentToJson(record))
+        prefs(ctx).edit().putString(KEY_PAYMENTS, arr.toString()).apply()
+    }
 
     // ---------- Chat ----------
     data class ChatMessage(

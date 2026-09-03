@@ -109,6 +109,11 @@
             android:exported="false"
             android:theme="@style/Theme.Capturo" />
 
+        <activity
+            android:name=".premium.PremiumPaymentsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Capturo" />
+
         <!-- Real backend-connected splash — kept available, not the launcher -->
         <activity
             android:name=".ui.splash.SplashActivity"

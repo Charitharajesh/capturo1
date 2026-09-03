@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_card_premium"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="26dp">
+
+    <ImageView
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:background="@drawable/bg_circle_surface"
+        android:padding="20dp"
+        android:src="@drawable/ic_google"
+        android:contentDescription="Google" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Google Sign-In"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="✨ Coming Soon"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:lineSpacingExtra="3dp"
+        android:text="We're putting the finishing touches on Google login. For now, please continue with your email and password."
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/btnDismiss"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/bg_gold_button"
+        android:fontFamily="@font/poppins_semibold"
+        android:gravity="center"
+        android:text="Got it"
+        android:textColor="@color/colorTextOnAccent"
+        android:textSize="15sp" />
+</LinearLayout>

@@ -1,29 +1,30 @@
 package com.capturo.app.premium
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
+import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.capturo.app.R
-import com.capturo.app.data.api.AuthApiService
-import com.capturo.app.data.model.request.LoginRequest
-import com.capturo.app.data.preferences.SessionManager
 import com.capturo.app.databinding.ActivityPremiumAuthBinding
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import javax.inject.Inject
+import com.capturo.app.databinding.DialogComingSoonBinding
 
-@AndroidEntryPoint
+/**
+ * Self-contained email/password auth backed by the on-device local store
+ * ([PremiumStore]). Users create an account (name, email, password, confirm)
+ * which is saved on the device, then sign in with the same credentials.
+ */
 class PremiumAuthActivity : AppCompatActivity() {
 
-    @Inject lateinit var authApi: AuthApiService
-    @Inject lateinit var session: SessionManager
-
     private lateinit var binding: ActivityPremiumAuthBinding
-    private var busy = false
+
+    /** true = create-account form, false = login form. */
+    private var signUpMode = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,37 +38,94 @@ class PremiumAuthActivity : AppCompatActivity() {
             error(R.drawable.bg_image_placeholder)
         }
 
-        val enter = View.OnClickListener { signInThenEnter() }
-        binding.btnGoogle.setOnClickListener(enter)
-        binding.btnPhone.setOnClickListener(enter)
-        binding.btnEmail.setOnClickListener(enter)
-        binding.btnPrimaryEnter.setOnClickListener(enter)
+        // Default to login if the user already has at least one saved account.
+        signUpMode = PremiumStore.currentAccount(this) == null && !hasAnyAccount()
+        applyMode(animate = false)
+
+        binding.btnToggleMode.setOnClickListener {
+            signUpMode = !signUpMode
+            applyMode(animate = true)
+        }
+        binding.btnPrimaryEnter.setOnClickListener { submit() }
+        binding.btnGoogle.setOnClickListener { showGoogleComingSoon() }
     }
 
-    /**
-     * Performs a real backend login (seeded demo account) so the app holds a
-     * genuine session token for authenticated calls, then opens the app.
-     * If the backend is unreachable it still enters so the demo never blocks.
-     */
-    private fun signInThenEnter() {
-        if (busy) return
-        busy = true
-        // Already signed in from a previous run — go straight in.
-        if (session.isLoggedIn()) { enterApp(); return }
+    private fun hasAnyAccount(): Boolean =
+        getSharedPreferences("capturo_premium", MODE_PRIVATE)
+            .getString("accounts", "[]")?.length ?: 0 > 2
 
-        lifecycleScope.launch {
-            runCatching {
-                val resp = authApi.login(LoginRequest("client@example.com", "Password123!"))
-                resp.body()?.data?.let { session.saveSession(it) }
-            }.onFailure {
-                Toast.makeText(
-                    this@PremiumAuthActivity,
-                    "Offline mode — showing demo content",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-            enterApp()
+    private fun applyMode(animate: Boolean) {
+        if (signUpMode) {
+            binding.textTitle.text = "Create your account"
+            binding.textSubtitle.text = "Sign up to book and cherish your moments"
+            binding.inputName.visibility = View.VISIBLE
+            binding.inputConfirm.visibility = View.VISIBLE
+            binding.btnPrimaryEnter.text = "Create Account"
+            binding.btnToggleMode.text = "Already have an account? Log in"
+        } else {
+            binding.textTitle.text = "Welcome back"
+            binding.textSubtitle.text = "Log in to continue capturing moments"
+            binding.inputName.visibility = View.GONE
+            binding.inputConfirm.visibility = View.GONE
+            binding.btnPrimaryEnter.text = "Log In"
+            binding.btnToggleMode.text = "New here? Create an account"
         }
+        if (animate) {
+            binding.textTitle.alpha = 0f
+            binding.textTitle.animate().alpha(1f).setDuration(260).start()
+            val form = binding.inputEmail
+            form.alpha = 0f
+            form.animate().alpha(1f).setDuration(260).start()
+        }
+    }
+
+    private fun submit() {
+        val email = binding.inputEmail.text.toString()
+        val password = binding.inputPassword.text.toString()
+
+        val error = if (signUpMode) {
+            val name = binding.inputName.text.toString()
+            val confirm = binding.inputConfirm.text.toString()
+            when {
+                password != confirm -> "Passwords do not match"
+                else -> PremiumStore.register(this, name, email, password)
+            }
+        } else {
+            when {
+                email.isBlank() || password.isBlank() -> "Please enter your email and password"
+                else -> PremiumStore.login(this, email, password)
+            }
+        }
+
+        if (error != null) {
+            Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+            return
+        }
+        val who = PremiumStore.currentAccount(this)?.name ?: "there"
+        Toast.makeText(this, "Welcome, $who!", Toast.LENGTH_SHORT).show()
+        enterApp()
+    }
+
+    /** Attractive "coming soon" popup shown when Google sign-in is tapped. */
+    private fun showGoogleComingSoon() {
+        val dialog = Dialog(this)
+        val db = DialogComingSoonBinding.inflate(layoutInflater)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(db.root)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window?.setLayout(
+            (resources.displayMetrics.widthPixels * 0.86f).toInt(),
+            android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        db.btnDismiss.setOnClickListener { dialog.dismiss() }
+
+        // Gentle pop-in animation.
+        db.root.scaleX = 0.85f
+        db.root.scaleY = 0.85f
+        db.root.alpha = 0f
+        db.root.animate().scaleX(1f).scaleY(1f).alpha(1f).setDuration(280).start()
+
+        dialog.show()
     }
 
     private fun enterApp() {

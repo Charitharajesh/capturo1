@@ -108,6 +108,7 @@ class PremiumPaymentActivity : AppCompatActivity() {
         binding.btnPay.text = "Processing…"
         binding.btnPay.postDelayed({
             val bookingId = "CAP-${Random.nextInt(1000, 9999)}"
+            recordPayment(bookingId)
             sendReceiptToChat(bookingId)
             startActivity(
                 Intent(this, PremiumConfirmationActivity::class.java)
@@ -121,6 +122,25 @@ class PremiumPaymentActivity : AppCompatActivity() {
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
         }, 1400)
+    }
+
+    /** Persists the completed payment to the on-device payment history. */
+    private fun recordPayment(bookingId: String) {
+        val photographer = intent.getStringExtra(EXTRA_PHOTOGRAPHER) ?: "Photographer"
+        val event = intent.getStringExtra(EXTRA_EVENT) ?: ""
+        val date = intent.getStringExtra(EXTRA_DATE) ?: ""
+        PremiumStore.addPayment(
+            this,
+            PremiumStore.PaymentRecord(
+                id = bookingId,
+                photographer = photographer,
+                event = event,
+                date = date,
+                method = selectedMethod,
+                amount = total,
+                ts = System.currentTimeMillis()
+            )
+        )
     }
 
     /**

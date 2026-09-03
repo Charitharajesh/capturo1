@@ -19,6 +19,7 @@ import com.capturo.app.premium.PremiumConversationsActivity
 import com.capturo.app.premium.PremiumDashboardActivity
 import com.capturo.app.premium.PremiumInfoActivity
 import com.capturo.app.premium.PremiumMainActivity
+import com.capturo.app.premium.PremiumPaymentsActivity
 import com.capturo.app.premium.PremiumRegisterActivity
 import com.capturo.app.premium.PremiumSavedActivity
 import com.capturo.app.premium.PremiumStore
@@ -43,6 +44,11 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        PremiumStore.currentAccount(requireContext())?.let { acc ->
+            binding.textProfileName.text = acc.name
+            binding.textProfileEmail.text = acc.email
+        }
+
         menuItems.forEach { binding.menuContainer.addView(buildRow(it)) }
 
         binding.btnSwitchMode.setOnClickListener {
@@ -52,6 +58,7 @@ class ProfileFragment : Fragment() {
             startActivity(Intent(requireContext(), target))
         }
         binding.btnLogout.setOnClickListener {
+            PremiumStore.logout(requireContext())
             startActivity(Intent(requireContext(), PremiumAuthActivity::class.java))
             requireActivity().finish()
         }
@@ -66,6 +73,7 @@ class ProfileFragment : Fragment() {
             )
             "Favorites" -> startActivity(Intent(ctx, PremiumSavedActivity::class.java))
             "Messages" -> startActivity(Intent(ctx, PremiumConversationsActivity::class.java))
+            "Payments" -> startActivity(Intent(ctx, PremiumPaymentsActivity::class.java))
             else -> startActivity(
                 Intent(ctx, PremiumInfoActivity::class.java)
                     .putExtra(PremiumInfoActivity.EXTRA_TITLE, label)

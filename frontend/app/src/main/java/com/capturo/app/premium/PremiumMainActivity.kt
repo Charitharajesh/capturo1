@@ -68,6 +68,10 @@ class PremiumMainActivity : AppCompatActivity() {
         binding.bottomNav.selectedItemId = R.id.nav_try
     }
 
+    fun goToProfile() {
+        binding.bottomNav.selectedItemId = R.id.nav_profile
+    }
+
     companion object {
         const val EXTRA_OPEN_TAB = "extra_open_tab"
     }

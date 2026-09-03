@@ -72,7 +72,11 @@ class PremiumSplashActivity : AppCompatActivity() {
     private fun goNext() {
         val prefs = getSharedPreferences("capturo_premium", Context.MODE_PRIVATE)
         val onboarded = prefs.getBoolean("onboarded", false)
-        val next = if (onboarded) PremiumMainActivity::class.java else PremiumOnboardingActivity::class.java
+        val next = when {
+            !onboarded -> PremiumOnboardingActivity::class.java
+            !PremiumStore.isLoggedIn(this) -> PremiumAuthActivity::class.java
+            else -> PremiumMainActivity::class.java
+        }
         startActivity(Intent(this, next))
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         finish()
