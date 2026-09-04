@@ -1,0 +1,4 @@
+{
+  "reporter": "./utils/jsonCollector.js",
+  "timeout": 30000
+}

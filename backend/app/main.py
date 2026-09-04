@@ -61,8 +61,13 @@ async def lifespan(app: FastAPI):
     try:
         check_db_connection()
         logger.info("db_connection_verified")
+        if settings.AUTO_CREATE_TABLES:
+            import app.models  # noqa: F401 — register every table on Base.metadata
+            from app.db.session import Base, engine
+            Base.metadata.create_all(bind=engine)
+            logger.info("db_tables_ensured", count=len(Base.metadata.tables))
     except Exception as e:
-        logger.error("db_connection_failed", error=str(e))
+        logger.error("db_startup_failed", error=str(e))
     yield
     logger.info("capturo_api_shutdown")
 
@@ -81,11 +86,15 @@ app = FastAPI(
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
+# When origins is a literal "*" wildcard, credentials must be disabled for
+# browsers to accept the response (the Capturo clients send bearer tokens in
+# the Authorization header, not cookies, so this is fine).
+_allow_all = settings.ALLOWED_ORIGINS == ["*"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.ALLOWED_ORIGINS,
-    allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE"],
+    allow_credentials=not _allow_all,
+    allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allow_headers=["Authorization", "Content-Type"],
 )
 

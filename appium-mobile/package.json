@@ -1,0 +1,17 @@
+{
+  "name": "capturo-appium-mobile",
+  "version": "1.0.0",
+  "description": "Genuine Appium end-to-end suite for the Capturo Android app (Premium flow), driving the real installed app on a connected device.",
+  "main": "tests/runTests.js",
+  "scripts": {
+    "test": "node tests/runTests.js"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "appium": "^3.7.0",
+    "appium-uiautomator2-driver": "^8.5.2",
+    "exceljs": "^4.4.0",
+    "mocha": "^12.0.0",
+    "webdriverio": "^9.31.5"
+  }
+}

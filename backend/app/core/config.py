@@ -7,9 +7,9 @@ for direct import throughout the application.
 """
 
 from functools import lru_cache
-from typing import List
+from typing import List, Union
 
-from pydantic import Field
+from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -18,6 +18,11 @@ class Settings(BaseSettings):
 
     # DATABASE
     DATABASE_URL: str = "mysql+pymysql://root:@127.0.0.1:3306/capturo"
+
+    # On startup, create any missing tables from the SQLAlchemy models.
+    # Lets the app bootstrap a fresh Supabase/Postgres database with no
+    # separate migration step. Safe to leave on (create_all is idempotent).
+    AUTO_CREATE_TABLES: bool = True
 
     # JWT
     SECRET_KEY: str = Field(default="supersecretkeyplaceholder", min_length=16)
@@ -30,7 +35,25 @@ class Settings(BaseSettings):
     DEBUG: bool = True
     VERSION: str = "1.0.0"
     APP_HOST: str = "http://localhost:8000"
-    ALLOWED_ORIGINS: List[str] = ["http://localhost", "http://10.0.2.2", "http://10.38.42.120", "http://10.38.42.120:8000"]
+    ALLOWED_ORIGINS: Union[str, List[str]] = [
+        "http://localhost",
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "http://10.0.2.2",
+        "http://10.38.42.120",
+        "http://10.38.42.120:8000",
+    ]
+
+    @field_validator("ALLOWED_ORIGINS", mode="after")
+    @classmethod
+    def _split_origins(cls, v):
+        """Accept a comma-separated string (easy to set as one env var) or a list.
+        '*' (any form) becomes ['*'] = allow all origins."""
+        if isinstance(v, str):
+            v = [part.strip() for part in v.split(",") if part.strip()]
+        if "*" in v:
+            return ["*"]
+        return v
 
     # UPLOADS
     UPLOAD_DIR: str = "uploads"

@@ -41,3 +41,13 @@ desktop.ini
 
 # Logs
 *.log
+
+# ===== Node (e2e-web / appium-mobile) =====
+node_modules/
+
+# Local-run debug output (real reports are committed deliberately; these
+# are transient screenshots/page-source only meant for CI artifacts)
+appium-mobile/reports/diagnostics/
+appium-mobile/appium.log
+e2e-web/reports/*.png
+

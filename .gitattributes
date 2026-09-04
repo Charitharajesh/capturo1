@@ -1,0 +1,8 @@
+# Normalize line endings; force LF for scripts that run inside Linux CI
+# runners regardless of the committer's local git config (a CRLF shebang
+# line breaks the Linux shell interpreter with "bad interpreter" errors).
+* text=auto eol=lf
+
+*.sh text eol=lf
+gradlew text eol=lf
+*.bat text eol=crlf
