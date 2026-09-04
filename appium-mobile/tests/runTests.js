@@ -21,6 +21,8 @@ const SPLASH_ACTIVITY = '.premium.PremiumSplashActivity';
 
 const results = []; // { name, category, status, durationMs, error }
 
+let currentDriver = null; // set once the session exists, used only for on-failure diagnostics
+
 async function step(category, name, fn) {
   const start = Date.now();
   try {
@@ -30,6 +32,33 @@ async function step(category, name, fn) {
   } catch (err) {
     results.push({ name, category, status: 'Fail', durationMs: Date.now() - start, error: err.message });
     console.log(`  ✗ ${name} -- ${err.message}`);
+    await captureDiagnostics(name);
+  }
+}
+
+/**
+ * On a real failure, save a screenshot + the live UiAutomator page source
+ * (the actual accessibility-tree view of the screen) so a CI run leaves
+ * real evidence of what was on screen, instead of us having to guess.
+ */
+async function captureDiagnostics(stepName) {
+  if (!currentDriver) return;
+  const fs = require('fs');
+  const path = require('path');
+  const dir = path.join(__dirname, '..', 'reports', 'diagnostics');
+  fs.mkdirSync(dir, { recursive: true });
+  const slug = stepName.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 60);
+  try {
+    const png = await currentDriver.takeScreenshot();
+    fs.writeFileSync(path.join(dir, `${slug}.png`), Buffer.from(png, 'base64'));
+  } catch (e) {
+    console.log(`  (could not capture screenshot: ${e.message})`);
+  }
+  try {
+    const source = await currentDriver.getPageSource();
+    fs.writeFileSync(path.join(dir, `${slug}.xml`), source);
+  } catch (e) {
+    console.log(`  (could not capture page source: ${e.message})`);
   }
 }
 
@@ -95,6 +124,7 @@ async function run() {
       'appium:waitForIdleTimeout': 0,
     },
   });
+  currentDriver = driver;
 
   try {
     // ---------- 1. Launch & first screen ----------

@@ -100,6 +100,14 @@ jobs:
           path: appium-mobile/appium.log
           if-no-files-found: ignore
 
+      - name: Upload failure diagnostics (screenshots + page source)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: appium-diagnostics
+          path: appium-mobile/reports/diagnostics/
+          if-no-files-found: ignore
+
       - name: Step summary
         if: always()
         run: |
