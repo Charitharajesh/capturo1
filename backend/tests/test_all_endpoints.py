@@ -10,7 +10,16 @@ from app.services.upload_service import upload_service
 from app.db.session import SessionLocal
 from app.models.user import User
 
-client = TestClient(app)
+# Entering TestClient as a context manager (rather than just constructing it)
+# is what actually runs FastAPI's lifespan startup — which is what creates
+# the tables via Base.metadata.create_all(). Registering __exit__ at process
+# exit keeps the rest of this module's plain top-level `client.*` calls working
+# unchanged instead of reindenting the whole test under a `with` block.
+import atexit
+
+_client_ctx = TestClient(app)
+client = _client_ctx.__enter__()
+atexit.register(_client_ctx.__exit__, None, None, None)
 
 def random_string(length=8):
     return "".join(random.choices(string.ascii_lowercase + string.digits, k=length))
