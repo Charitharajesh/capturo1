@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
           java-version: '17'
@@ -30,7 +30,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
           cache-dependency-path: appium-mobile/package-lock.json
 
@@ -82,16 +82,7 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
-          script: |
-            adb install -r frontend/app/build/outputs/apk/debug/app-debug.apk
-            cd appium-mobile
-            npx appium --log-level info --port 4723 > appium.log 2>&1 &
-            for i in $(seq 1 30); do
-              code=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:4723/status || true)
-              if [ "$code" = "200" ]; then echo "Appium is ready"; break; fi
-              sleep 2
-            done
-            npm test
+          script: chmod +x appium-mobile/scripts/ci-run.sh && appium-mobile/scripts/ci-run.sh
 
       - name: Upload Excel report
         if: always()

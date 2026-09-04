@@ -14,7 +14,7 @@
 
 const { remote } = require('webdriverio');
 const path = require('path');
-const { writeExcelReport } = require('../utils/excelReporter');
+const { writeExcelReport, writeJsonReport, writeStepSummary } = require('../utils/excelReporter');
 
 const PKG = 'com.capturo.app';
 const SPLASH_ACTIVITY = '.premium.PremiumSplashActivity';
@@ -249,6 +249,9 @@ async function run() {
   const outPath = path.join(__dirname, '..', 'reports', 'appium-report.xlsx');
   await writeExcelReport(results, outPath);
   console.log(`Excel report written to ${outPath}`);
+
+  writeJsonReport(results, path.join(__dirname, '..', 'reports', 'results.json'));
+  writeStepSummary(results);
 
   if (failed > 0) process.exitCode = 1;
 }

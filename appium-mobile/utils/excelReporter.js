@@ -70,4 +70,48 @@ async function writeExcelReport(results, outPath) {
   await wb.xlsx.writeFile(outPath);
 }
 
-module.exports = { writeExcelReport };
+/** Writes the same real results as JSON, for debugging and the CI step summary. */
+function writeJsonReport(results, outPath) {
+  fs.mkdirSync(path.dirname(outPath), { recursive: true });
+  const passed = results.filter((r) => r.status === 'Pass').length;
+  fs.writeFileSync(outPath, JSON.stringify({
+    generatedAt: new Date().toISOString(),
+    stats: { total: results.length, passed, failed: results.length - passed },
+    results,
+  }, null, 2));
+}
+
+/**
+ * Renders the real results as a markdown table and appends it to the GitHub
+ * Actions job summary, so pass/fail status is visible on the run page
+ * without downloading the Excel artifact.
+ */
+function writeStepSummary(results) {
+  const summaryFile = process.env.GITHUB_STEP_SUMMARY;
+  const passed = results.filter((r) => r.status === 'Pass').length;
+  const totalMs = results.reduce((s, r) => s + r.durationMs, 0);
+
+  const lines = [];
+  lines.push('### 📱 Mobile E2E (Appium) — test case results');
+  lines.push('');
+  lines.push(`**${passed}/${results.length} passed** (${results.length - passed} failed) in ${(totalMs / 1000).toFixed(1)}s — ${results.length ? ((passed / results.length) * 100).toFixed(1) : 0}% pass rate`);
+  lines.push('');
+  lines.push('| Status | Category | Test | Duration |');
+  lines.push('|---|---|---|---|');
+  results.forEach((r) => {
+    const icon = r.status === 'Pass' ? '✅' : '❌';
+    lines.push(`| ${icon} | ${r.category} | ${r.name} | ${r.durationMs}ms |`);
+  });
+  lines.push('');
+  lines.push('Full Excel report: see the `appium-report` build artifact on this run.');
+  lines.push('');
+
+  const md = lines.join('\n');
+  if (summaryFile) {
+    fs.appendFileSync(summaryFile, md + '\n');
+  } else {
+    console.log(md);
+  }
+}
+
+module.exports = { writeExcelReport, writeJsonReport, writeStepSummary };

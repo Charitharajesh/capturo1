@@ -4,9 +4,9 @@
   "description": "Selenium end-to-end test suite for the Capturo website",
   "private": true,
   "scripts": {
-    "test": "mocha tests/**/*.spec.js --timeout 30000",
-    "posttest": "npm run report",
-    "report": "node utils/excelReporter.js"
+    "test": "node utils/runAndReport.js",
+    "report": "node utils/excelReporter.js",
+    "summary": "node utils/writeStepSummary.js"
   },
   "dependencies": {
     "exceljs": "^4.4.0",

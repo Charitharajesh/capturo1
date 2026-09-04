@@ -16,8 +16,7 @@ async function main() {
   const resultsPath = path.join(reportsDir, 'results.json');
 
   if (!fs.existsSync(resultsPath)) {
-    console.error(`No results found at ${resultsPath}. Run "npm test" first.`);
-    process.exit(1);
+    throw new Error(`No results found at ${resultsPath}. Run "npm test" first.`);
   }
 
   const payload = JSON.parse(fs.readFileSync(resultsPath, 'utf8'));
@@ -85,7 +84,11 @@ async function main() {
   console.log(`Total: ${total} | Passed: ${passed} | Failed: ${failed} | Pass rate: ${passRate.toFixed(2)}%`);
 }
 
-main().catch((err) => {
-  console.error('Failed to generate Excel report:', err);
-  process.exit(1);
-});
+module.exports = { main };
+
+if (require.main === module) {
+  main().catch((err) => {
+    console.error('Failed to generate Excel report:', err);
+    process.exit(1);
+  });
+}

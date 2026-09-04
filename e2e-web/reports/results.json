@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-09-04T05:12:16.816Z",
+  "generatedAt": "2026-09-04T05:37:05.875Z",
   "stats": {
     "suites": 8,
     "tests": 15,
     "passes": 15,
     "failures": 0,
     "pending": 0,
-    "start": "2026-09-04T05:10:30.939Z",
-    "end": "2026-09-04T05:12:16.815Z",
-    "duration": 105876
+    "start": "2026-09-04T05:36:14.456Z",
+    "end": "2026-09-04T05:37:05.874Z",
+    "duration": 51418
   },
   "results": [
     {
@@ -16,7 +16,7 @@
       "fullName": "Landing page loads with the Capturo title and hero heading",
       "category": "Landing page",
       "status": "Pass",
-      "duration": 47,
+      "duration": 42,
       "error": null
     },
     {
@@ -24,7 +24,7 @@
       "fullName": "Landing page shows Sign In and Get Started in the nav bar",
       "category": "Landing page",
       "status": "Pass",
-      "duration": 77,
+      "duration": 85,
       "error": null
     },
     {
@@ -32,7 +32,7 @@
       "fullName": "Sign up flow opens the auth overlay when Get Started is clicked",
       "category": "Sign up flow",
       "status": "Pass",
-      "duration": 187,
+      "duration": 151,
       "error": null
     },
     {
@@ -40,7 +40,7 @@
       "fullName": "Sign up flow submits name/email/password and lands in the signed-in app shell",
       "category": "Sign up flow",
       "status": "Pass",
-      "duration": 653,
+      "duration": 555,
       "error": null
     },
     {
@@ -48,7 +48,7 @@
       "fullName": "App navigation tabs Home tab renders the photographer grid and hero banner",
       "category": "App navigation tabs",
       "status": "Pass",
-      "duration": 176,
+      "duration": 120,
       "error": null
     },
     {
@@ -56,7 +56,7 @@
       "fullName": "App navigation tabs Discover tab renders post cards",
       "category": "App navigation tabs",
       "status": "Pass",
-      "duration": 145,
+      "duration": 107,
       "error": null
     },
     {
@@ -64,7 +64,7 @@
       "fullName": "App navigation tabs Try a Photographer tab renders a swipe card",
       "category": "App navigation tabs",
       "status": "Pass",
-      "duration": 136,
+      "duration": 113,
       "error": null
     },
     {
@@ -72,7 +72,7 @@
       "fullName": "App navigation tabs Bookings tab renders status tabs and booking cards",
       "category": "App navigation tabs",
       "status": "Pass",
-      "duration": 112,
+      "duration": 81,
       "error": null
     },
     {
@@ -80,7 +80,7 @@
       "fullName": "Photographer detail and booking flow opens a photographer detail page with name, portfolio grid and packages",
       "category": "Photographer detail and booking flow",
       "status": "Pass",
-      "duration": 1249,
+      "duration": 1215,
       "error": null
     },
     {
@@ -88,7 +88,7 @@
       "fullName": "Photographer detail and booking flow selects a package, books it, and confirms via toast + notification badge",
       "category": "Photographer detail and booking flow",
       "status": "Pass",
-      "duration": 6308,
+      "duration": 6379,
       "error": null
     },
     {
@@ -96,7 +96,7 @@
       "fullName": "Notifications bell shows an unread badge with a welcome notification, which clears on open",
       "category": "Notifications bell",
       "status": "Pass",
-      "duration": 168,
+      "duration": 225,
       "error": null
     },
     {
@@ -104,7 +104,7 @@
       "fullName": "Notifications bell a new notification re-shows the badge, and Mark all read clears it again",
       "category": "Notifications bell",
       "status": "Pass",
-      "duration": 400,
+      "duration": 293,
       "error": null
     },
     {
@@ -112,7 +112,7 @@
       "fullName": "Try a Photographer — swipe favouriting liking a photographer shows a \"Saved to favourites\" toast and advances the card",
       "category": "Try a Photographer — swipe favouriting",
       "status": "Pass",
-      "duration": 350,
+      "duration": 376,
       "error": null
     },
     {
@@ -120,7 +120,7 @@
       "fullName": "Sign out opens the profile menu and logs out back to the marketing site",
       "category": "Sign out",
       "status": "Pass",
-      "duration": 373,
+      "duration": 264,
       "error": null
     },
     {
@@ -128,7 +128,7 @@
       "fullName": "Responsive mobile nav shows the mobile bottom nav and hides the desktop nav below the 860px breakpoint",
       "category": "Responsive mobile nav",
       "status": "Pass",
-      "duration": 539,
+      "duration": 490,
       "error": null
     }
   ]
