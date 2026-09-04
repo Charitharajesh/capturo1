@@ -3,9 +3,6 @@ name: Web E2E (Selenium)
 on:
   push:
     branches: ['**']
-    paths:
-      - 'e2e-web/**'
-      - '.github/workflows/web-e2e.yml'
   pull_request:
     paths:
       - 'e2e-web/**'
@@ -30,6 +27,7 @@ jobs:
         run: npm ci
 
       - name: Serve the site under test
+        if: ${{ vars.WEB_APP_URL == '' }}
         working-directory: e2e-web/site-under-test
         run: |
           python3 -m http.server 5173 &
@@ -43,7 +41,8 @@ jobs:
       - name: Run Selenium E2E suite
         working-directory: e2e-web
         env:
-          BASE_URL: http://127.0.0.1:5173
+          BASE_URL: ${{ vars.WEB_APP_URL || 'http://127.0.0.1:5173' }}
+          BACKEND_URL: ${{ vars.BACKEND_URL }}
         run: npm test
 
       - name: Upload Excel report

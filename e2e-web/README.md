@@ -19,7 +19,7 @@ npm test
 
 ## CI
 
-`.github/workflows/web-e2e.yml` runs this suite on every push/PR touching `e2e-web/**`: it serves `site-under-test/` on port 5173, runs `npm test`, and uploads `reports/selenium-report.xlsx` as a build artifact named `selenium-report`.
+`.github/workflows/web-e2e.yml` runs this suite on every push and pull request. Set repository variables `WEB_APP_URL` to the public GitHub Pages URL and `BACKEND_URL` to the public Render API URL. The runner passes the API URL to the web app as its `?api=` override. The workflow uploads `reports/selenium-report.xlsx` as a build artifact named `selenium-report`.
 - `npm test` runs Mocha over `tests/**/*.spec.js`, then automatically runs the `posttest` script (`npm run report`), which converts the real results captured during the run into an Excel report at `reports/selenium-report.xlsx`.
 
 ## What's covered

@@ -8,7 +8,14 @@
 const { Builder, until } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 
-const BASE_URL = process.env.BASE_URL || 'http://localhost:5173';
+const BASE_URL = (() => {
+  const baseUrl = process.env.BASE_URL || 'http://localhost:5173';
+  const backendUrl = process.env.BACKEND_URL;
+  if (!backendUrl) return baseUrl;
+  const url = new URL(baseUrl);
+  url.searchParams.set('api', backendUrl);
+  return url.toString();
+})();
 
 async function buildDriver() {
   const options = new chrome.Options();
