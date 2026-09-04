@@ -87,6 +87,12 @@ async function run() {
       'appium:skipUnlock': false,
       'appium:unicodeKeyboard': true,
       'appium:resetKeyboard': true,
+      // RecyclerViews that keep loading images (photographer/portfolio
+      // covers via Coil) never let Android's "wait for idle" settle, so
+      // UiAutomator2's default pre-command idle wait can report elements
+      // on that screen as not found even though they're on screen. This
+      // is the documented fix: skip the idle wait entirely.
+      'appium:waitForIdleTimeout': 0,
     },
   });
 
