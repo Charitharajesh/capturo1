@@ -62,10 +62,41 @@ async function captureDiagnostics(stepName) {
   }
 }
 
+/**
+ * Scrolls the nearest scrollable container until a view with the given
+ * resource id is on screen. Most Premium screens are a single NestedScrollView
+ * whose primary-action buttons and lower lists (e.g. recyclerPhotographers,
+ * btnBookNow, btnLogout, methodsContainer) start below the fold, so a plain
+ * waitForDisplayed on them times out until we bring them into view. A no-op /
+ * failure here is fine — the caller still does the real waitForDisplayed.
+ */
+async function scrollToResId(driver, resId) {
+  const target = `new UiSelector().resourceId("${PKG}:id/${resId}")`;
+  try {
+    const scrollable = await driver.$(
+      `android=new UiScrollable(new UiSelector().scrollable(true).instance(0))` +
+        `.setAsVerticalList().scrollIntoView(${target})`
+    );
+    return await scrollable.isExisting();
+  } catch (_) {
+    return false; // screen has no scrollable container, or the view isn't there yet
+  }
+}
+
 async function findByResId(driver, resId, timeout = 20000) {
-  const el = await driver.$(`android=new UiSelector().resourceId("${PKG}:id/${resId}")`);
-  await el.waitForDisplayed({ timeout });
-  return el;
+  const selector = `android=new UiSelector().resourceId("${PKG}:id/${resId}")`;
+  let el = await driver.$(selector);
+  try {
+    await el.waitForDisplayed({ timeout: Math.min(timeout, 8000) });
+    return el;
+  } catch (_) {
+    // Not visible yet — it may just be below the fold. Scroll to it and retry
+    // with the full timeout budget (covers screens that also load data slowly).
+    await scrollToResId(driver, resId);
+    el = await driver.$(selector);
+    await el.waitForDisplayed({ timeout });
+    return el;
+  }
 }
 
 async function existsByResId(driver, resId, timeout = 20000) {

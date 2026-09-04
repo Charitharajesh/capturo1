@@ -9,6 +9,11 @@ set -euo pipefail
 echo "Installing the debug APK..."
 adb install -r frontend/app/build/outputs/apk/debug/app-debug.apk
 
+# The booking-confirmed system notification needs POST_NOTIFICATIONS on
+# Android 13+ (a runtime permission). Harmless / no-op on the API 29 CI
+# emulator, where it is granted at install time.
+adb shell pm grant com.capturo.app android.permission.POST_NOTIFICATIONS || true
+
 cd appium-mobile
 
 echo "Starting Appium server..."
