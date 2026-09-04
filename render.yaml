@@ -1,0 +1,31 @@
+# Render Blueprint — deploys the Capturo FastAPI backend.
+# https://render.com  →  New  →  Blueprint  →  pick this repo.
+#
+# After the first deploy, set the DATABASE_URL env var (marked sync:false below)
+# in the Render dashboard to your Supabase *session pooler* URI, e.g.:
+#   postgresql+psycopg2://postgres.nlgcwdvbmbqaphtzyxmc:YOUR_DB_PASSWORD@aws-0-ap-south-1.pooler.supabase.com:5432/postgres
+# (a literal "@" in the password must be written as %40)
+
+services:
+  - type: web
+    name: capturo-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.6"
+      - key: DATABASE_URL
+        sync: false          # set this secret in the dashboard
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "True"
+      - key: AUTO_CREATE_TABLES
+        value: "True"
+      - key: ALLOWED_ORIGINS
+        value: "*"

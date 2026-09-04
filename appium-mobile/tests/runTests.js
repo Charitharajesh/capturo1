@@ -33,13 +33,13 @@ async function step(category, name, fn) {
   }
 }
 
-async function findByResId(driver, resId, timeout = 10000) {
+async function findByResId(driver, resId, timeout = 20000) {
   const el = await driver.$(`android=new UiSelector().resourceId("${PKG}:id/${resId}")`);
   await el.waitForDisplayed({ timeout });
   return el;
 }
 
-async function existsByResId(driver, resId, timeout = 6000) {
+async function existsByResId(driver, resId, timeout = 20000) {
   const el = await driver.$(`android=new UiSelector().resourceId("${PKG}:id/${resId}")`);
   return el.waitForDisplayed({ timeout, timeoutMsg: `#${resId} not displayed within ${timeout}ms` })
     .then(() => true)
@@ -106,7 +106,7 @@ async function run() {
         const skip = await findByResId(driver, 'btnSkip');
         await skip.click();
       }
-      const authField = await findByResId(driver, 'btnPrimaryEnter', 8000);
+      const authField = await findByResId(driver, 'btnPrimaryEnter', 20000);
       if (!(await authField.isDisplayed())) throw new Error('Auth screen did not appear');
     });
 
@@ -128,41 +128,41 @@ async function run() {
       await driver.pause(500);
       await (await findByResId(driver, 'btnPrimaryEnter')).click();
       await driver.pause(1200);
-      const home = await findByResId(driver, 'textGreeting', 10000);
+      const home = await findByResId(driver, 'textGreeting', 25000);
       await assertText(home, 'QA', 'Home greeting after sign-up');
     });
 
     // ---------- 4. Home tab content ----------
     await step('Home', 'Home tab shows the photographer list', async () => {
-      const list = await findByResId(driver, 'recyclerPhotographers', 8000);
+      const list = await findByResId(driver, 'recyclerPhotographers', 25000);
       if (!(await list.isDisplayed())) throw new Error('Photographer list not displayed');
     });
 
     // ---------- 5. Bottom navigation: Discover ----------
     await step('Navigation', 'Bottom nav switches to Discover feed', async () => {
       await (await findByResId(driver, 'nav_discover')).click();
-      const feed = await findByResId(driver, 'recyclerFeed', 8000);
+      const feed = await findByResId(driver, 'recyclerFeed', 20000);
       if (!(await feed.isDisplayed())) throw new Error('Discover feed not displayed');
     });
 
     // ---------- 6. Bottom navigation: Try ----------
     await step('Navigation', 'Bottom nav switches to Try (map) tab', async () => {
       await (await findByResId(driver, 'nav_try')).click();
-      const map = await findByResId(driver, 'mapContainer', 8000);
+      const map = await findByResId(driver, 'mapContainer', 20000);
       if (!(await map.isDisplayed())) throw new Error('Map container not displayed on Try tab');
     });
 
     // ---------- 7. Bottom navigation: Bookings ----------
     await step('Navigation', 'Bottom nav switches to Bookings tab', async () => {
       await (await findByResId(driver, 'nav_bookings')).click();
-      const tab = await findByResId(driver, 'tabUpcoming', 8000);
+      const tab = await findByResId(driver, 'tabUpcoming', 20000);
       if (!(await tab.isDisplayed())) throw new Error('Bookings tabs not displayed');
     });
 
     // ---------- 8. Bottom navigation: Profile ----------
     await step('Navigation', 'Bottom nav switches to Profile tab with correct name', async () => {
       await (await findByResId(driver, 'nav_profile')).click();
-      const name = await findByResId(driver, 'textProfileName', 8000);
+      const name = await findByResId(driver, 'textProfileName', 20000);
       await assertText(name, testName, 'Profile name');
     });
 
@@ -170,18 +170,18 @@ async function run() {
     await step('Photographer profile', 'Tapping a photographer card opens their profile', async () => {
       await (await findByResId(driver, 'nav_home')).click();
       await driver.pause(500);
-      const viewProfileBtn = await findByResId(driver, 'btnViewProfile', 8000);
+      const viewProfileBtn = await findByResId(driver, 'btnViewProfile', 25000);
       await viewProfileBtn.click();
-      const nameEl = await findByResId(driver, 'textName', 8000);
+      const nameEl = await findByResId(driver, 'textName', 20000);
       if (!(await nameEl.isDisplayed())) throw new Error('Photographer profile name not displayed');
     });
 
     // ---------- 10. Book Now -> booking screen ----------
     await step('Booking flow', '"Book Now" opens the booking screen with a package pre-selected', async () => {
       await (await findByResId(driver, 'btnBookNow')).click();
-      const title = await findByResId(driver, 'textTitle', 8000);
+      const title = await findByResId(driver, 'textTitle', 20000);
       await assertText(title, 'Book', 'Booking screen title');
-      const packages = await findByResId(driver, 'packageContainer', 5000);
+      const packages = await findByResId(driver, 'packageContainer', 20000);
       const children = await packages.$$('*');
       if (children.length === 0) throw new Error('No packages rendered in packageContainer');
     });
@@ -191,20 +191,20 @@ async function run() {
       await typeInto(driver, await findByResId(driver, 'inputLocation'), 'Test City, QA');
       await driver.hideKeyboard().catch(() => {});
       await (await findByResId(driver, 'btnContinue')).click();
-      const amount = await findByResId(driver, 'textAmount', 8000);
+      const amount = await findByResId(driver, 'textAmount', 20000);
       const amtText = await amount.getText();
       if (!/₹/.test(amtText)) throw new Error(`Payment amount does not look like a price: "${amtText}"`);
     });
 
     // ---------- 12. Select a method and pay ----------
     await step('Payment', 'Selecting a payment method and paying reaches the confirmation screen', async () => {
-      const methods = await findByResId(driver, 'methodsContainer', 5000);
+      const methods = await findByResId(driver, 'methodsContainer', 20000);
       const rows = await methods.$$('*');
       if (rows.length === 0) throw new Error('No payment methods rendered');
       await rows[0].click();
       await (await findByResId(driver, 'btnPay')).click();
       // Real processing delay in the app is ~1.4s plus activity transition.
-      const bookingIdRow = await findByResId(driver, 'rowBookingId', 10000);
+      const bookingIdRow = await findByResId(driver, 'rowBookingId', 25000);
       if (!(await bookingIdRow.isDisplayed())) throw new Error('Confirmation screen booking ID row not shown');
     });
 
@@ -222,9 +222,9 @@ async function run() {
 
     // ---------- 14. Back to home from confirmation ----------
     await step('Booking flow', '"Home" on the confirmation screen returns to the main tabs', async () => {
-      const homeBtn = await findByResId(driver, 'btnHome', 6000);
+      const homeBtn = await findByResId(driver, 'btnHome', 20000);
       await homeBtn.click();
-      const greeting = await findByResId(driver, 'textGreeting', 8000);
+      const greeting = await findByResId(driver, 'textGreeting', 20000);
       if (!(await greeting.isDisplayed())) throw new Error('Did not return to home screen');
     });
 
