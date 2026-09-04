@@ -1,0 +1,16 @@
+{
+  "name": "capturo-web-e2e",
+  "version": "1.0.0",
+  "description": "Selenium end-to-end test suite for the Capturo website",
+  "private": true,
+  "scripts": {
+    "test": "mocha tests/**/*.spec.js --timeout 30000",
+    "posttest": "npm run report",
+    "report": "node utils/excelReporter.js"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0",
+    "mocha": "^10.7.3",
+    "selenium-webdriver": "^4.25.0"
+  }
+}

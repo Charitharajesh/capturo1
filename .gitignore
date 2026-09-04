@@ -41,3 +41,7 @@ desktop.ini
 
 # Logs
 *.log
+
+# ===== Node (e2e-web / appium-mobile) =====
+node_modules/
+

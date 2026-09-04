@@ -1,0 +1,1010 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capturo — Premium Photography Marketplace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0B0D; --surface:#141416; --surface-variant:#1C1C1F; --surface-elevated:#242428;
+    --primary:#C9A24B; --primary-dark:#A6822F; --primary-light:#E4C878;
+    --accent:#D4AF37; --accent-soft:#EBD9A0;
+    --grad-start:#E4C878; --grad-end:#C9A24B;
+    --text:#FFFFFF; --text-secondary:#B8B8BD; --text-hint:#7A7A80; --on-accent:#0B0B0D;
+    --success:#4ADE80; --warning:#FBBF24; --error:#F87171; --border:#2E2E33; --divider:#26262A;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--bg); color:var(--text); font-family:'Poppins',sans-serif; -webkit-font-smoothing:antialiased; }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+  .gold-text{ background:linear-gradient(135deg,var(--grad-start),var(--grad-end)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; font-family:inherit; font-weight:600; font-size:14px; padding:14px 26px; border-radius:14px; border:none; cursor:pointer; transition:transform .15s, box-shadow .15s; }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-primary{ background:linear-gradient(135deg,var(--grad-start),var(--grad-end)); color:var(--on-accent); box-shadow:0 8px 24px rgba(201,162,75,.25); }
+  .btn-primary:hover{ box-shadow:0 12px 30px rgba(201,162,75,.35); }
+  .btn-outline{ background:transparent; color:var(--text); border:1.5px solid var(--border); }
+  .btn-outline:hover{ border-color:var(--primary); color:var(--primary-light); }
+  section{ padding:96px 0; }
+  .eyebrow{ text-transform:uppercase; letter-spacing:3px; font-size:11px; font-weight:600; color:var(--primary); margin-bottom:14px; }
+  h1,h2,h3{ margin:0; font-weight:800; }
+  .section-head{ text-align:center; max-width:640px; margin:0 auto 56px; }
+  .section-head h2{ font-size:clamp(28px,4vw,40px); margin-bottom:14px; }
+  .section-head p{ color:var(--text-secondary); font-size:15px; line-height:1.6; }
+
+  /* ================= MARKETING SITE ================= */
+  #site.hidden{ display:none; }
+  header{ position:sticky; top:0; z-index:100; background:rgba(11,11,13,.85); backdrop-filter:blur(14px); border-bottom:1px solid var(--divider); }
+  nav{ display:flex; align-items:center; justify-content:space-between; padding:18px 24px; max-width:var(--maxw); margin:0 auto; }
+  .logo{ font-size:20px; font-weight:800; letter-spacing:1px; }
+  .nav-links{ display:flex; gap:36px; font-size:14px; color:var(--text-secondary); }
+  .nav-links a:hover{ color:var(--text); }
+  .nav-cta{ display:flex; gap:12px; align-items:center; }
+  @media (max-width:860px){ .nav-links{ display:none; } .nav-cta .btn-outline{ display:none; } }
+
+  .hero{ padding:80px 0 60px; position:relative; overflow:hidden; }
+  .hero::before{ content:""; position:absolute; top:-200px; right:-200px; width:600px; height:600px; background:radial-gradient(circle, rgba(212,175,55,.14), transparent 70%); pointer-events:none; }
+  .hero-grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; }
+  @media (max-width:960px){ .hero-grid{ grid-template-columns:1fr; } }
+  .hero-copy .eyebrow{ display:flex; align-items:center; gap:8px; }
+  .hero-copy h1{ font-size:clamp(36px,5.4vw,58px); line-height:1.08; letter-spacing:-1px; }
+  .hero-copy p.lead{ margin-top:20px; color:var(--text-secondary); font-size:16px; line-height:1.7; max-width:480px; }
+  .hero-actions{ display:flex; gap:14px; margin-top:32px; flex-wrap:wrap; }
+  .hero-stats{ display:flex; gap:36px; margin-top:48px; flex-wrap:wrap; }
+  .hero-stats .stat b{ display:block; font-size:24px; font-weight:800; }
+  .hero-stats .stat span{ font-size:12px; color:var(--text-hint); }
+
+  .phone-wrap{ display:flex; justify-content:center; position:relative; }
+  .phone-glow{ position:absolute; width:320px; height:320px; background:radial-gradient(circle, rgba(212,175,55,.25), transparent 70%); filter:blur(30px); }
+  #phone-shell{ width:300px; height:630px; border-radius:38px; background:#050505; border:8px solid #050505; box-shadow:0 0 0 2px #1c1c1f, 0 30px 70px rgba(0,0,0,.6); position:relative; overflow:hidden; z-index:1; }
+  #phone-shell .inner{ width:100%; height:100%; overflow:hidden; border-radius:30px; background:var(--bg); pointer-events:none; }
+  .phone-notch{ position:absolute; top:0; left:50%; transform:translateX(-50%); width:120px; height:22px; background:#050505; border-radius:0 0 16px 16px; z-index:2; }
+
+  .trust-strip{ padding:28px 0; border-top:1px solid var(--divider); border-bottom:1px solid var(--divider); }
+  .trust-strip .wrap{ display:flex; justify-content:space-around; flex-wrap:wrap; gap:16px; color:var(--text-hint); font-size:12px; letter-spacing:1px; text-transform:uppercase; }
+
+  .feature-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  @media (max-width:860px){ .feature-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .feature-grid{ grid-template-columns:1fr; } }
+  .feature-card{ background:var(--surface); border:1px solid var(--border); border-radius:22px; padding:28px 24px; transition:border-color .2s, transform .2s; }
+  .feature-card:hover{ border-color:var(--primary); transform:translateY(-4px); }
+  .feature-card .ic{ width:48px; height:48px; border-radius:14px; background:var(--surface-variant); display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:18px; }
+  .feature-card h3{ font-size:17px; margin-bottom:8px; }
+  .feature-card p{ font-size:13px; color:var(--text-secondary); line-height:1.6; margin:0; }
+
+  .steps{ display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+  @media (max-width:860px){ .steps{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .steps{ grid-template-columns:1fr; } }
+  .step{ position:relative; padding:28px 20px 20px; background:var(--surface); border:1px solid var(--border); border-radius:20px; }
+  .step .num{ font-size:13px; font-weight:800; color:var(--on-accent); width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,var(--grad-start),var(--grad-end)); display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
+  .step h3{ font-size:15px; margin-bottom:6px; }
+  .step p{ font-size:12.5px; color:var(--text-secondary); margin:0; line-height:1.6; }
+
+  .cat-strip{ display:flex; gap:16px; overflow-x:auto; padding:6px 0 18px; scrollbar-width:none; }
+  .cat-strip::-webkit-scrollbar{ display:none; }
+  .cat-chip{ flex:0 0 auto; width:150px; border-radius:20px; overflow:hidden; position:relative; height:170px; cursor:pointer; }
+  .cat-chip img{ width:100%; height:100%; object-fit:cover; }
+  .cat-chip::after{ content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.75), transparent 55%); }
+  .cat-chip .label{ position:absolute; bottom:12px; left:14px; font-weight:600; font-size:13.5px; z-index:2; }
+
+  .showcase-grid{ column-count:3; column-gap:16px; }
+  @media (max-width:860px){ .showcase-grid{ column-count:2; } }
+  @media (max-width:560px){ .showcase-grid{ column-count:1; } }
+  .showcase-item{ break-inside:avoid; margin-bottom:16px; border-radius:18px; overflow:hidden; position:relative; border:1px solid var(--border); }
+  .showcase-item img{ width:100%; display:block; }
+  .showcase-item .tag{ position:absolute; top:12px; left:12px; background:rgba(0,0,0,.55); backdrop-filter:blur(4px); padding:5px 12px; border-radius:14px; font-size:11px; font-weight:600; }
+
+  .creator-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+  @media (max-width:960px){ .creator-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .creator-grid{ grid-template-columns:1fr; } }
+  .creator-card{ background:var(--surface); border:1px solid var(--border); border-radius:20px; overflow:hidden; transition:transform .2s, border-color .2s; cursor:pointer; }
+  .creator-card:hover{ transform:translateY(-4px); border-color:var(--primary); }
+  .creator-card .cover{ height:140px; background-size:cover; background-position:center; }
+  .creator-card .body{ padding:16px; }
+  .creator-card .name{ font-weight:700; font-size:14.5px; display:flex; align-items:center; gap:6px; }
+  .creator-card .spec{ font-size:11.5px; color:var(--text-secondary); margin:4px 0 10px; }
+  .creator-card .row{ display:flex; justify-content:space-between; font-size:11.5px; color:var(--text-hint); }
+  .badge-verified{ font-size:9px; background:var(--surface-variant); color:var(--accent); padding:2px 7px; border-radius:8px; font-weight:600; }
+
+  .stats-band{ background:var(--surface); border-top:1px solid var(--divider); border-bottom:1px solid var(--divider); }
+  .stats-band .wrap{ display:grid; grid-template-columns:repeat(4,1fr); gap:24px; text-align:center; padding:56px 24px; }
+  @media (max-width:700px){ .stats-band .wrap{ grid-template-columns:repeat(2,1fr); } }
+  .stats-band b{ font-size:clamp(26px,3.4vw,38px); font-weight:800; display:block; }
+  .stats-band span{ font-size:12px; color:var(--text-hint); letter-spacing:.5px; }
+
+  .testi-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  @media (max-width:860px){ .testi-grid{ grid-template-columns:1fr; } }
+  .testi-card{ background:var(--surface); border:1px solid var(--border); border-radius:22px; padding:26px; }
+  .testi-card .stars{ color:var(--accent); font-size:13px; margin-bottom:14px; }
+  .testi-card p{ font-size:13.5px; color:var(--text-secondary); line-height:1.7; margin:0 0 20px; }
+  .testi-who{ display:flex; align-items:center; gap:10px; }
+  .testi-who .av{ width:38px; height:38px; border-radius:50%; background-size:cover; background-position:center; }
+  .testi-who b{ font-size:13px; display:block; }
+  .testi-who span{ font-size:11px; color:var(--text-hint); }
+
+  .cta-band{ background:linear-gradient(135deg, #1a1610, #0B0B0D 70%); border-radius:32px; margin:0 24px; padding:64px 40px; text-align:center; position:relative; overflow:hidden; border:1px solid var(--border); }
+  .cta-band::before{ content:""; position:absolute; inset:0; background:radial-gradient(circle at 30% 20%, rgba(212,175,55,.18), transparent 55%); }
+  .cta-band h2{ font-size:clamp(26px,4vw,36px); position:relative; }
+  .cta-band p{ color:var(--text-secondary); margin:14px auto 30px; max-width:460px; font-size:14px; position:relative; }
+  .cta-band .hero-actions{ justify-content:center; position:relative; }
+
+  footer{ padding:56px 0 32px; border-top:1px solid var(--divider); margin-top:40px; }
+  .foot-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:32px; }
+  @media (max-width:700px){ .foot-grid{ grid-template-columns:1fr 1fr; } }
+  .foot-grid h4{ font-size:12px; text-transform:uppercase; letter-spacing:1px; color:var(--text-hint); margin:0 0 14px; }
+  .foot-grid a{ display:block; font-size:13px; color:var(--text-secondary); margin-bottom:10px; }
+  .foot-grid a:hover{ color:var(--primary-light); }
+  .foot-bottom{ display:flex; justify-content:space-between; align-items:center; margin-top:48px; padding-top:24px; border-top:1px solid var(--divider); font-size:12px; color:var(--text-hint); flex-wrap:wrap; gap:12px; }
+
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+
+  /* ================= AUTH OVERLAY ================= */
+  #auth-overlay{ position:fixed; inset:0; background:rgba(5,5,6,.72); backdrop-filter:blur(6px); display:none; align-items:center; justify-content:center; z-index:1000; padding:20px; }
+  #auth-overlay.show{ display:flex; }
+  .auth-card{ width:100%; max-width:400px; background:var(--surface); border:1px solid var(--border); border-radius:26px; overflow:hidden; position:relative; }
+  .auth-card .close{ position:absolute; top:16px; right:16px; width:32px; height:32px; border-radius:50%; background:rgba(0,0,0,.4); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:2; }
+  .auth-hero{ height:150px; background-size:cover; background-position:center; position:relative; }
+  .auth-hero::after{ content:""; position:absolute; inset:0; background:linear-gradient(to bottom, rgba(0,0,0,0), var(--surface)); }
+  .auth-body{ padding:8px 26px 26px; margin-top:-30px; position:relative; }
+  .auth-body h1{ font-size:23px; margin:0 0 4px; }
+  .auth-body .sub{ color:var(--text-secondary); font-size:13px; margin-bottom:16px; }
+  .field{ width:100%; height:48px; background:var(--surface-variant); border:1px solid var(--border); border-radius:14px; color:var(--text); padding:0 16px; font-family:inherit; font-size:14px; margin-bottom:10px; }
+  .field::placeholder{ color:var(--text-hint); }
+  .btn-gold{ width:100%; height:50px; border-radius:14px; background:linear-gradient(135deg,var(--grad-start),var(--grad-end)); color:var(--on-accent); border:none; font-weight:600; font-size:14.5px; cursor:pointer; font-family:inherit; }
+  .btn-outline-full{ width:100%; height:48px; border-radius:14px; background:transparent; border:1.5px solid var(--primary); color:var(--error); font-weight:600; font-size:14px; cursor:pointer; font-family:inherit; }
+  .toggle-line{ text-align:center; color:var(--text-secondary); font-size:13px; padding:12px 0; cursor:pointer; }
+  .or-divider{ display:flex; align-items:center; gap:10px; color:var(--text-hint); font-size:12px; margin:12px 0; }
+  .or-divider .line{ flex:1; height:1px; background:var(--text-hint); opacity:.35; }
+  .social-btn{ display:flex; align-items:center; justify-content:center; gap:10px; height:48px; border-radius:14px; background:var(--surface-variant); border:1px solid var(--border); cursor:pointer; font-size:13.5px; }
+
+  /* ================= APP (signed-in — real website layout, no phone frame) ================= */
+  #app-shell{ display:none; }
+  #app-shell.show{ display:block; }
+
+  .app-header{ position:sticky; top:0; z-index:200; background:rgba(11,11,13,.92); backdrop-filter:blur(14px); border-bottom:1px solid var(--divider); }
+  .app-nav{ display:flex; align-items:center; gap:32px; padding:16px 24px; }
+  .app-nav-links{ display:flex; gap:8px; flex:1; }
+  .applink{ cursor:pointer; padding:9px 16px; border-radius:10px; font-size:14px; color:var(--text-secondary); font-weight:500; }
+  .applink:hover{ color:var(--text); }
+  .applink.active{ color:var(--on-accent); background:linear-gradient(135deg,var(--grad-start),var(--grad-end)); font-weight:600; }
+  @media (max-width:860px){ .app-nav-links{ display:none; } }
+  .app-nav-right{ display:flex; align-items:center; gap:14px; }
+  .app-search{ background:var(--surface-variant); border:1px solid var(--border); border-radius:20px; padding:10px 18px; font-size:12.5px; color:var(--text-hint); cursor:pointer; min-width:220px; }
+  @media (max-width:700px){ .app-search{ display:none; } }
+  .app-avatar-wrap{ position:relative; }
+  .avatar{ width:40px; height:40px; border-radius:50%; background:var(--surface-variant); display:flex; align-items:center; justify-content:center; color:var(--primary); font-size:17px; cursor:pointer; border:1px solid var(--border); }
+  .profile-dropdown{ position:absolute; top:50px; right:0; background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:8px; min-width:170px; display:none; flex-direction:column; box-shadow:0 20px 50px rgba(0,0,0,.55); z-index:50; }
+  .profile-dropdown.show{ display:flex; }
+  .profile-dropdown a{ padding:10px 12px; border-radius:9px; font-size:13px; cursor:pointer; }
+  .profile-dropdown a:hover{ background:var(--surface-variant); }
+  .profile-dropdown hr{ border:none; border-top:1px solid var(--divider); margin:6px 4px; }
+
+  .notif-wrap{ position:relative; }
+  .notif-bell{ width:40px; height:40px; border-radius:50%; background:var(--surface-variant); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:16px; cursor:pointer; position:relative; }
+  .notif-badge{ position:absolute; top:-3px; right:-3px; min-width:16px; height:16px; padding:0 4px; border-radius:8px; background:var(--error); color:#fff; font-size:9px; font-weight:700; display:flex; align-items:center; justify-content:center; line-height:1; }
+  .notif-badge.hide{ display:none; }
+  .notif-dropdown{ position:absolute; top:50px; right:0; width:340px; max-width:88vw; max-height:420px; overflow-y:auto; background:var(--surface); border:1px solid var(--border); border-radius:16px; box-shadow:0 20px 50px rgba(0,0,0,.55); z-index:60; display:none; }
+  .notif-dropdown.show{ display:block; }
+  .notif-dropdown .head{ display:flex; justify-content:space-between; align-items:center; padding:14px 16px; border-bottom:1px solid var(--divider); position:sticky; top:0; background:var(--surface); }
+  .notif-dropdown .head b{ font-size:14px; }
+  .notif-dropdown .head span{ font-size:11px; color:var(--primary); cursor:pointer; }
+  .notif-item{ display:flex; gap:10px; padding:12px 16px; border-bottom:1px solid var(--divider); }
+  .notif-item:last-child{ border-bottom:none; }
+  .notif-item.unread{ background:rgba(201,162,75,.07); }
+  .notif-item .ic{ width:34px; height:34px; border-radius:10px; background:var(--surface-variant); display:flex; align-items:center; justify-content:center; font-size:15px; flex-shrink:0; }
+  .notif-item .body{ flex:1; min-width:0; }
+  .notif-item .title{ font-size:12.5px; font-weight:600; }
+  .notif-item .msg{ font-size:11.5px; color:var(--text-secondary); margin-top:2px; }
+  .notif-item .time{ font-size:10px; color:var(--text-hint); margin-top:4px; }
+  .notif-empty{ padding:34px 16px; text-align:center; color:var(--text-hint); font-size:12.5px; }
+
+  .app-mobile-nav{ display:none; }
+  @media (max-width:860px){
+    .app-mobile-nav{ display:flex; position:sticky; bottom:0; z-index:150; background:#0E0E10; border-top:1px solid var(--divider); }
+    .app-mobile-nav .nav-item{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; padding:10px 0; color:var(--text-secondary); font-size:10px; cursor:pointer; }
+    .app-mobile-nav .nav-item .ic{ font-size:18px; }
+    .app-mobile-nav .nav-item.active{ color:var(--accent); }
+  }
+
+  .app-main{ padding:44px 24px 90px; min-height:60vh; max-width:var(--maxw); margin:0 auto; }
+  .app-tab{ display:none; }
+  .app-tab.active{ display:block; }
+
+  .page-title-row{ display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:32px; flex-wrap:wrap; gap:16px; }
+  .page-title-row h1{ font-size:clamp(24px,3vw,32px); }
+  .page-title-row p{ color:var(--text-secondary); font-size:13.5px; margin-top:6px; }
+
+  .home-hero{ border-radius:28px; overflow:hidden; position:relative; padding:44px 44px; margin-bottom:44px; background-size:cover; background-position:center; min-height:180px; display:flex; flex-direction:column; justify-content:center; cursor:pointer; }
+  .home-hero::before{ content:""; position:absolute; inset:0; background:linear-gradient(120deg, rgba(11,11,13,.92) 30%, rgba(11,11,13,.35)); }
+  .home-hero > *{ position:relative; z-index:1; }
+  .home-hero h2{ font-size:clamp(22px,3vw,30px); margin-bottom:6px; }
+  .home-hero p{ color:var(--text-secondary); font-size:13.5px; max-width:420px; }
+  .home-hero .cta{ margin-top:18px; }
+
+  .app-section-title{ font-weight:700; font-size:19px; margin:0 0 18px; }
+  .app-cat-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:16px; margin-bottom:48px; }
+  .app-cat-card{ border-radius:18px; overflow:hidden; height:140px; position:relative; cursor:pointer; border:1px solid var(--border); transition:transform .2s; }
+  .app-cat-card:hover{ transform:translateY(-3px); }
+  .app-cat-card img{ width:100%; height:100%; object-fit:cover; }
+  .app-cat-card::after{ content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.78), transparent 55%); }
+  .app-cat-card .label{ position:absolute; bottom:10px; left:12px; font-weight:600; font-size:12.5px; z-index:2; }
+
+  .app-photog-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+  @media (max-width:1024px){ .app-photog-grid{ grid-template-columns:repeat(3,1fr); } }
+  @media (max-width:760px){ .app-photog-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:480px){ .app-photog-grid{ grid-template-columns:1fr; } }
+  .app-photog-card{ background:var(--surface); border:1px solid var(--border); border-radius:20px; overflow:hidden; cursor:pointer; transition:transform .2s, border-color .2s; }
+  .app-photog-card:hover{ transform:translateY(-4px); border-color:var(--primary); }
+  .app-photog-card .cover{ height:150px; background-size:cover; background-position:center; }
+  .app-photog-card .body{ padding:16px; }
+  .app-photog-card .name{ font-weight:700; font-size:14.5px; display:flex; align-items:center; gap:6px; }
+  .app-photog-card .spec{ font-size:11.5px; color:var(--text-secondary); margin:4px 0 10px; }
+  .app-photog-card .row{ display:flex; justify-content:space-between; font-size:11.5px; color:var(--text-hint); }
+
+  .discover-grid{ column-count:3; column-gap:18px; }
+  @media (max-width:900px){ .discover-grid{ column-count:2; } }
+  @media (max-width:560px){ .discover-grid{ column-count:1; } }
+  .discover-card{ break-inside:avoid; margin-bottom:18px; border-radius:18px; overflow:hidden; background:var(--surface); border:1px solid var(--border); }
+  .discover-card .post-top{ display:flex; align-items:center; gap:10px; padding:12px 14px; }
+  .discover-card .av{ width:32px; height:32px; border-radius:50%; background-size:cover; background-position:center; }
+  .discover-card .who{ font-size:13px; font-weight:600; }
+  .discover-card .loc{ font-size:11px; color:var(--text-hint); }
+  .discover-card img{ width:100%; display:block; }
+  .discover-card .foot{ padding:10px 14px 14px; font-size:12px; color:var(--text-secondary); }
+  .discover-card .caption{ font-size:12px; margin-top:6px; }
+
+  .try-panel{ background:var(--surface); border:1px solid var(--border); border-radius:28px; padding:48px; display:flex; flex-direction:column; align-items:center; text-align:center; max-width:420px; margin:0 auto; }
+  .swipe-card{ width:100%; height:400px; border-radius:22px; background-size:cover; background-position:center; position:relative; box-shadow:0 14px 40px rgba(0,0,0,.5); }
+  .swipe-card .grad{ position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.85), transparent 60%); border-radius:22px; }
+  .swipe-card .txt{ position:absolute; bottom:18px; left:18px; right:18px; text-align:left; }
+  .swipe-card .txt h3{ margin:0; font-size:19px; }
+  .swipe-card .txt p{ margin:2px 0 0; font-size:12.5px; color:var(--text-secondary); }
+  .swipe-actions{ display:flex; gap:22px; margin-top:24px; }
+  .swipe-actions button{ width:58px; height:58px; border-radius:50%; border:none; font-size:21px; cursor:pointer; }
+  .swipe-actions .no{ background:var(--surface-variant); color:var(--error); }
+  .swipe-actions .yes{ background:linear-gradient(135deg,var(--grad-start),var(--grad-end)); color:var(--on-accent); }
+
+  .bk-tabs-row{ display:flex; gap:10px; margin-bottom:28px; }
+  .bk-tab{ padding:10px 20px; border-radius:12px; font-size:13px; font-weight:600; cursor:pointer; background:var(--surface-variant); color:var(--text-secondary); }
+  .bk-tab.active{ background:linear-gradient(135deg,var(--grad-start),var(--grad-end)); color:var(--on-accent); }
+  .bk-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  @media (max-width:900px){ .bk-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:600px){ .bk-grid{ grid-template-columns:1fr; } }
+  .bk-card{ background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:18px; }
+  .bk-card .top{ display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+  .bk-card .av{ width:44px; height:44px; border-radius:12px; background-size:cover; background-position:center; }
+  .bk-card .who{ font-weight:700; font-size:14px; }
+  .bk-card .type{ font-size:12px; color:var(--text-secondary); }
+  .bk-card .meta{ font-size:12px; color:var(--text-hint); margin-bottom:4px; }
+  .status-pill{ font-size:10px; padding:3px 9px; border-radius:10px; font-weight:600; display:inline-block; margin-top:8px; }
+  .status-CONFIRMED{ background:#4ADE8018; color:var(--success); }
+  .status-COMPLETED{ background:#60A5FA18; color:#60A5FA; }
+  .status-CANCELLED{ background:#F8717118; color:var(--error); }
+  .bk-price{ float:right; color:var(--accent); font-weight:700; font-size:13px; }
+
+  .profile-grid{ display:grid; grid-template-columns:320px 1fr; gap:28px; }
+  @media (max-width:760px){ .profile-grid{ grid-template-columns:1fr; } }
+  .profile-summary{ background:var(--surface); border:1px solid var(--border); border-radius:24px; padding:30px; text-align:center; height:fit-content; }
+  .profile-summary .av{ width:88px; height:88px; border-radius:50%; background:var(--surface-variant); display:flex; align-items:center; justify-content:center; color:var(--primary); font-size:32px; margin:0 auto 16px; }
+  .profile-summary .name{ font-weight:700; font-size:19px; }
+  .profile-summary .email{ font-size:12.5px; color:var(--text-secondary); margin-bottom:20px; }
+  .profile-stats{ display:flex; justify-content:space-around; border-top:1px solid var(--divider); padding-top:16px; margin-top:6px; }
+  .profile-stats b{ display:block; font-size:16px; }
+  .profile-stats span{ font-size:10.5px; color:var(--text-hint); }
+  .menu-list{ background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:8px; margin-bottom:16px; }
+  .menu-item{ display:flex; align-items:center; gap:12px; padding:15px 16px; font-size:14px; cursor:pointer; border-bottom:1px solid var(--divider); }
+  .menu-item:last-child{ border-bottom:none; }
+  .menu-item:hover{ color:var(--primary-light); }
+
+  .detail-hero-web{ border-radius:28px; overflow:hidden; position:relative; height:320px; background-size:cover; background-position:center; margin-bottom:32px; }
+  .detail-hero-web::after{ content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(11,11,13,.9), transparent 55%); }
+  .detail-back-web{ position:absolute; top:20px; left:20px; width:40px; height:40px; border-radius:50%; background:rgba(0,0,0,.5); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:2; }
+  .detail-hero-web .info{ position:absolute; bottom:20px; left:28px; right:28px; z-index:1; }
+  .detail-hero-web h1{ font-size:26px; }
+  .detail-hero-web .row{ display:flex; gap:14px; color:var(--text-secondary); font-size:13px; margin-top:8px; }
+  .detail-grid{ display:grid; grid-template-columns:1.6fr 1fr; gap:32px; align-items:start; }
+  @media (max-width:860px){ .detail-grid{ grid-template-columns:1fr; } }
+  .detail-body .about{ font-size:14px; color:var(--text-secondary); line-height:1.7; margin-bottom:26px; }
+  .portfolio-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  .portfolio-grid .p{ aspect-ratio:1; border-radius:10px; background-size:cover; background-position:center; }
+  .booking-box{ background:var(--surface); border:1px solid var(--border); border-radius:22px; padding:22px; position:sticky; top:100px; }
+  .pkg-card{ background:var(--surface-variant); border:1px solid var(--border); border-radius:16px; padding:14px; margin-bottom:12px; cursor:pointer; }
+  .pkg-card.selected{ border-color:var(--primary); background:rgba(201,162,75,.08); }
+  .pkg-card .top{ display:flex; justify-content:space-between; align-items:baseline; }
+  .pkg-card .top .n{ font-weight:700; font-size:14.5px; }
+  .pkg-card .top .p{ font-weight:700; color:var(--accent); }
+  .pkg-card ul{ margin:8px 0 0; padding-left:18px; font-size:11px; color:var(--text-secondary); }
+
+  .toast{ position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:var(--surface-elevated); color:var(--text); padding:12px 22px; border-radius:20px; font-size:13px; opacity:0; transition:opacity .25s; pointer-events:none; z-index:3000; white-space:nowrap; box-shadow:0 10px 30px rgba(0,0,0,.5); }
+  .toast.show{ opacity:1; }
+</style>
+</head>
+<body>
+
+<!-- ================= MARKETING SITE ================= -->
+<div id="site">
+  <header>
+    <nav>
+      <div class="logo">CAPTU<span class="gold-text">RO</span></div>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#creators">Photographers</a>
+        <a href="#showcase">Showcase</a>
+        <a href="#testimonials">Reviews</a>
+      </div>
+      <div class="nav-cta">
+        <a href="#" class="btn btn-outline" onclick="openAuth('login');return false;">Sign In</a>
+        <a href="#" class="btn btn-primary" onclick="openAuth('register');return false;">Get Started</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">✦ Premium Photography Marketplace</div>
+        <h1>Capture Moments.<br><span class="gold-text">Book Memories.</span></h1>
+        <p class="lead">Capturo connects you with India's finest wedding, portrait and event photographers — browse real portfolios, compare packages, and book with confidence in minutes.</p>
+        <div class="hero-actions">
+          <a href="#" class="btn btn-primary" onclick="openAuth('register');return false;">Get Started</a>
+          <a href="#creators" class="btn btn-outline">Browse Photographers</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><b>2,400+</b><span>Verified Photographers</span></div>
+          <div class="stat"><b>68,000+</b><span>Bookings Completed</span></div>
+          <div class="stat"><b>4.9 ★</b><span>Average Rating</span></div>
+        </div>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone-glow"></div>
+        <div id="phone-shell">
+          <div class="phone-notch"></div>
+          <div class="inner" id="hero-preview"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="trust-strip">
+    <div class="wrap">
+      <span>Madanapalle</span><span>Tirupati</span><span>Bengaluru</span><span>Hyderabad</span><span>Chennai</span><span>Vijayawada</span>
+    </div>
+  </div>
+
+  <section id="features">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Why Capturo</div>
+        <h2>Everything you need to book the perfect shoot</h2>
+        <p>From discovery to delivery — Capturo handles the entire creator-booking journey in one polished experience.</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card reveal"><div class="ic">📍</div><h3>Discover Nearby</h3><p>Find verified photographers around you, filtered by category, rating and price.</p></div>
+        <div class="feature-card reveal"><div class="ic">🖼️</div><h3>Real Portfolios</h3><p>Browse genuine past work, reviews and specialties before you commit.</p></div>
+        <div class="feature-card reveal"><div class="ic">📅</div><h3>Instant Booking</h3><p>Pick a package, choose a date and time slot, and confirm in a few taps.</p></div>
+        <div class="feature-card reveal"><div class="ic">💬</div><h3>Direct Chat</h3><p>Message your photographer directly to align on style, timing and location.</p></div>
+        <div class="feature-card reveal"><div class="ic">💳</div><h3>Secure Payments</h3><p>Razorpay-backed checkout with signature verification and instant receipts.</p></div>
+        <div class="feature-card reveal"><div class="ic">📦</div><h3>Media Delivery</h3><p>Get your final edited gallery delivered straight inside the app.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" style="background:var(--surface); border-top:1px solid var(--divider); border-bottom:1px solid var(--divider);">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Simple Process</div>
+        <h2>Book in four easy steps</h2>
+      </div>
+      <div class="steps">
+        <div class="step reveal"><div class="num">1</div><h3>Explore</h3><p>Browse categories and photographers near you.</p></div>
+        <div class="step reveal"><div class="num">2</div><h3>Compare</h3><p>Review portfolios, ratings and package pricing.</p></div>
+        <div class="step reveal"><div class="num">3</div><h3>Book</h3><p>Choose a date, time slot and confirm your package.</p></div>
+        <div class="step reveal"><div class="num">4</div><h3>Capture</h3><p>Meet your photographer and receive your gallery.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Categories</div>
+        <h2>Every kind of moment, covered</h2>
+      </div>
+      <div class="cat-strip" id="cat-strip"></div>
+    </div>
+  </section>
+
+  <section id="showcase" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Showcase</div>
+        <h2>Recent work from Capturo creators</h2>
+      </div>
+      <div class="showcase-grid" id="showcase-grid"></div>
+    </div>
+  </section>
+
+  <section id="creators" style="background:var(--surface); border-top:1px solid var(--divider); border-bottom:1px solid var(--divider);">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Top Rated</div>
+        <h2>Meet a few of our photographers</h2>
+        <p>Sign in to view full profiles, portfolios and book directly.</p>
+      </div>
+      <div class="creator-grid" id="creator-grid"></div>
+    </div>
+  </section>
+
+  <div class="stats-band">
+    <div class="wrap">
+      <div><b class="gold-text">2,400+</b><span>Verified Photographers</span></div>
+      <div><b class="gold-text">68,000+</b><span>Bookings Completed</span></div>
+      <div><b class="gold-text">120+</b><span>Cities Covered</span></div>
+      <div><b class="gold-text">4.9 / 5</b><span>Average Rating</span></div>
+    </div>
+  </div>
+
+  <section id="testimonials">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Loved by Clients</div>
+        <h2>What people are saying</h2>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card reveal">
+          <div class="stars">★★★★★</div>
+          <p>"Booked our wedding photographer in one evening — portfolios made the choice so easy. The final gallery blew us away."</p>
+          <div class="testi-who"><div class="av" style="background-image:url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=70')"></div><div><b>Ananya R.</b><span>Bengaluru</span></div></div>
+        </div>
+        <div class="testi-card reveal">
+          <div class="stars">★★★★★</div>
+          <p>"The chat feature meant zero miscommunication on shoot day. Everything, from booking to delivery, felt premium."</p>
+          <div class="testi-who"><div class="av" style="background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=70')"></div><div><b>Rohan K.</b><span>Chennai</span></div></div>
+        </div>
+        <div class="testi-card reveal">
+          <div class="stars">★★★★★</div>
+          <p>"As a photographer, Capturo brought me consistent bookings without chasing leads. The payout flow is seamless."</p>
+          <div class="testi-who"><div class="av" style="background-image:url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=70')"></div><div><b>Priya M.</b><span>Hyderabad · Photographer</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="cta-band reveal">
+      <h2>Ready to capture your next moment?</h2>
+      <p>Sign in to browse full profiles, chat with photographers and book your shoot.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn btn-primary" onclick="openAuth('register');return false;">Get Started</a>
+        <a href="#creators" class="btn btn-outline">Browse Photographers</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <div class="logo" style="margin-bottom:12px">CAPTU<span class="gold-text">RO</span></div>
+          <p style="font-size:13px;color:var(--text-secondary);line-height:1.6;max-width:260px;">Your moments deserve to be captured beautifully. A premium marketplace connecting clients with photographers and videographers.</p>
+        </div>
+        <div><h4>Product</h4><a href="#features">Features</a><a href="#how">How it works</a><a href="#creators">Photographers</a></div>
+        <div><h4>Company</h4><a href="#" onclick="return false;">About</a><a href="#" onclick="return false;">Careers</a><a href="#" onclick="return false;">Contact</a></div>
+        <div><h4>Legal</h4><a href="#" onclick="return false;">Privacy</a><a href="#" onclick="return false;">Terms</a></div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 Capturo. All rights reserved.</span>
+        <span>Website companion to the Capturo Android app</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ================= AUTH OVERLAY ================= -->
+<div id="auth-overlay">
+  <div class="auth-card">
+    <div class="close" onclick="closeAuth()">✕</div>
+    <div class="auth-hero" style="background-image:url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=70')"></div>
+    <div class="auth-body">
+      <h1 id="auth-title">Create your account</h1>
+      <div class="sub" id="auth-sub">Sign up to book and cherish your moments</div>
+      <input class="field" id="auth-name" placeholder="Full name">
+      <input class="field" placeholder="Email address">
+      <input class="field" type="password" placeholder="Password">
+      <input class="field" id="auth-confirm" type="password" placeholder="Re-enter password">
+      <button class="btn-gold" id="auth-cta" onclick="doSignIn()">Create Account</button>
+      <div class="toggle-line" onclick="toggleAuthMode()" id="auth-toggle">Already have an account? Log in</div>
+      <div class="or-divider"><div class="line"></div>or<div class="line"></div></div>
+      <div class="social-btn" onclick="doSignIn()">🔍 Continue with Google</div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= APP (signed-in website) ================= -->
+<div id="app-shell">
+  <header class="app-header">
+    <nav class="app-nav">
+      <div class="logo">CAPTU<span class="gold-text">RO</span></div>
+      <div class="app-nav-links">
+        <div class="applink active" data-tab="home" onclick="switchTab('home')">Home</div>
+        <div class="applink" data-tab="discover" onclick="switchTab('discover')">Discover</div>
+        <div class="applink" data-tab="try" onclick="switchTab('try')">Try a Photographer</div>
+        <div class="applink" data-tab="bookings" onclick="switchTab('bookings')">Bookings</div>
+      </div>
+      <div class="app-nav-right">
+        <div class="app-search" onclick="toast('Search — type a photographer, event or location')">🔍 Search photographers, events...</div>
+        <div class="notif-wrap">
+          <div class="notif-bell" onclick="toggleNotifDropdown()">🔔<span class="notif-badge hide" id="notif-badge">0</span></div>
+          <div class="notif-dropdown" id="notif-dropdown">
+            <div class="head"><b>Notifications</b><span onclick="markAllRead()">Mark all read</span></div>
+            <div id="notif-list"></div>
+          </div>
+        </div>
+        <div class="app-avatar-wrap">
+          <div class="avatar" onclick="toggleProfileMenu()">👤</div>
+          <div class="profile-dropdown" id="profile-dropdown">
+            <a onclick="switchTab('profile');toggleProfileMenu()">My Profile</a>
+            <a onclick="switchTab('bookings');toggleProfileMenu()">My Bookings</a>
+            <hr>
+            <a onclick="goToSite()">Back to website</a>
+            <a onclick="signOut()" style="color:var(--error)">Log out</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="app-main" id="app-main">
+    <section class="app-tab active" id="tab-home"></section>
+    <section class="app-tab" id="tab-discover"></section>
+    <section class="app-tab" id="tab-try"></section>
+    <section class="app-tab" id="tab-bookings"></section>
+    <section class="app-tab" id="tab-profile"></section>
+    <section class="app-tab" id="tab-detail"></section>
+  </main>
+
+  <div class="app-mobile-nav">
+    <div class="nav-item active" data-tab="home" onclick="switchTab('home')"><span class="ic">🏠</span>Home</div>
+    <div class="nav-item" data-tab="discover" onclick="switchTab('discover')"><span class="ic">🔍</span>Discover</div>
+    <div class="nav-item" data-tab="try" onclick="switchTab('try')"><span class="ic">📷</span>Try</div>
+    <div class="nav-item" data-tab="bookings" onclick="switchTab('bookings')"><span class="ic">📅</span>Bookings</div>
+    <div class="nav-item" data-tab="profile" onclick="switchTab('profile')"><span class="ic">👤</span>Profile</div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const U = (id) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=900&q=70`;
+
+const categories = [
+  ["📸","Wedding","1519741497674-611481863552"], ["🎂","Birthday","1464349095431-e9a21285b5f3"],
+  ["💍","Pre-Wedding","1520854221256-17451cc331bf"], ["👤","Portrait","1524504388940-b1c1722653e1"],
+  ["👶","Baby Shoot","1522673607200-164d1b6ce486"], ["🤰","Maternity","1544005313-94ddf0286df2"],
+  ["🎉","Events","1492684223066-81342ee5ff30"], ["🏢","Corporate","1507003211169-0a1dd7228f2d"],
+  ["📦","Product","1500648767791-00dcc994a43e"], ["🎓","Graduation","1438761681033-6461ffad8d80"]
+].map(([e,n,i]) => ({emoji:e, name:n, img:U(i)}));
+
+function pkgs(base){
+  return [
+    {name:"Basic", price:`₹${base}`, features:["4 Hours Coverage","1 Photographer","200 Edited Photos","Online Gallery"]},
+    {name:"Premium", price:`₹${(base*2+5000).toLocaleString('en-IN')}`, features:["8 Hours Coverage","2 Photographers","500 Edited Photos","Cinematic Video","Premium Album"]},
+    {name:"Luxury", price:`₹${(base*4+5000).toLocaleString('en-IN')}`, features:["Full Day Coverage","3 Photographers","2 Videographers","Drone Shots","Premium Album","Same-day Teaser"]}
+  ];
+}
+
+const photographers = [
+  {id:"p1", name:"Arjun Visuals", spec:"Wedding • Pre-Wedding • Events", loc:"Madanapalle", rating:4.9, reviews:126, price:"₹15,000", verified:true, available:true,
+   cover:U("1519741497674-611481863552"), avatar:U("1507003211169-0a1dd7228f2d"),
+   about:"Award-winning wedding storyteller capturing candid emotions and timeless frames across South India. Every wedding is a film waiting to be told.",
+   portfolio:["1519741497674-611481863552","1511285560929-80b456fea0bc","1606216794074-735e91aa2c92","1520854221256-17451cc331bf","1606800052052-a08af7148866","1465495976277-4387d4b0b4c6","1524504388940-b1c1722653e1","1534528741775-53994a69daeb","1507003211169-0a1dd7228f2d"].map(U),
+   packages:pkgs(15000)},
+  {id:"p2", name:"Pixel Stories", spec:"Portrait • Events", loc:"Tirupati", rating:4.8, reviews:98, price:"₹8,000", verified:true, available:true,
+   cover:U("1524504388940-b1c1722653e1"), avatar:U("1500648767791-00dcc994a43e"),
+   about:"Portrait and lifestyle specialist. Natural light, honest expressions, and a relaxed studio experience for every client.",
+   portfolio:["1524504388940-b1c1722653e1","1534528741775-53994a69daeb","1507003211169-0a1dd7228f2d","1438761681033-6461ffad8d80","1544005313-94ddf0286df2","1500648767791-00dcc994a43e","1492684223066-81342ee5ff30","1511578314322-379afb476865","1530103862676-de8c9debad1d"].map(U),
+   packages:pkgs(8000)},
+  {id:"p3", name:"Moments Studio", spec:"Wedding • Birthday • Events", loc:"Bengaluru", rating:5.0, reviews:214, price:"₹20,000", verified:true, available:false,
+   cover:U("1606216794074-735e91aa2c92"), avatar:U("1534528741775-53994a69daeb"),
+   about:"A full-service premium studio for weddings and celebrations. Cinematic teams, drone coverage, and luxury albums.",
+   portfolio:["1606216794074-735e91aa2c92","1465495976277-4387d4b0b4c6","1520854221256-17451cc331bf","1511285560929-80b456fea0bc","1519741497674-611481863552","1606800052052-a08af7148866","1464349095431-e9a21285b5f3","1522673607200-164d1b6ce486","1519671482749-fd09be7ccebf"].map(U),
+   packages:pkgs(20000)},
+  {id:"p4", name:"Frame & Light", spec:"Fashion • Portrait", loc:"Hyderabad", rating:4.7, reviews:87, price:"₹12,000", verified:true, available:true,
+   cover:U("1544005313-94ddf0286df2"), avatar:U("1438761681033-6461ffad8d80"),
+   about:"Editorial fashion and bold portraiture. Studio and outdoor shoots with a signature dramatic lighting style.",
+   portfolio:["1544005313-94ddf0286df2","1438761681033-6461ffad8d80","1524504388940-b1c1722653e1","1507003211169-0a1dd7228f2d","1500648767791-00dcc994a43e","1534528741775-53994a69daeb","1464349095431-e9a21285b5f3","1492684223066-81342ee5ff30","1522673607200-164d1b6ce486"].map(U),
+   packages:pkgs(12000)},
+  {id:"p5", name:"Golden Hour Films", spec:"Pre-Wedding • Cinematic", loc:"Chennai", rating:4.9, reviews:152, price:"₹18,000", verified:true, available:true,
+   cover:U("1520854221256-17451cc331bf"), avatar:U("1507003211169-0a1dd7228f2d"),
+   about:"We chase the light. Cinematic pre-wedding films and dreamy couple shoots at the most beautiful hours of the day.",
+   portfolio:["1520854221256-17451cc331bf","1511285560929-80b456fea0bc","1519741497674-611481863552","1606216794074-735e91aa2c92","1606800052052-a08af7148866","1465495976277-4387d4b0b4c6","1530103862676-de8c9debad1d","1511578314322-379afb476865","1492684223066-81342ee5ff30"].map(U),
+   packages:pkgs(18000)},
+  {id:"p6", name:"Candid Canvas", spec:"Maternity • Baby • Family", loc:"Vijayawada", rating:4.8, reviews:73, price:"₹9,500", verified:false, available:true,
+   cover:U("1522673607200-164d1b6ce486"), avatar:U("1544005313-94ddf0286df2"),
+   about:"Gentle, warm and heartfelt. Specialising in maternity, newborn and family sessions that you'll treasure forever.",
+   portfolio:["1522673607200-164d1b6ce486","1544005313-94ddf0286df2","1524504388940-b1c1722653e1","1438761681033-6461ffad8d80","1500648767791-00dcc994a43e","1534528741775-53994a69daeb","1519671482749-fd09be7ccebf","1464349095431-e9a21285b5f3","1507003211169-0a1dd7228f2d"].map(U),
+   packages:pkgs(9500)},
+  {id:"p7", name:"Studio Noir", spec:"Corporate • Product", loc:"Hyderabad", rating:4.6, reviews:64, price:"₹11,000", verified:true, available:true,
+   cover:U("1492684223066-81342ee5ff30"), avatar:U("1500648767791-00dcc994a43e"),
+   about:"Clean, sharp commercial photography. Product, corporate headshots and brand campaigns delivered with precision.",
+   portfolio:["1492684223066-81342ee5ff30","1511578314322-379afb476865","1530103862676-de8c9debad1d","1464349095431-e9a21285b5f3","1522673607200-164d1b6ce486","1519671482749-fd09be7ccebf","1519741497674-611481863552","1511285560929-80b456fea0bc","1606216794074-735e91aa2c92"].map(U),
+   packages:pkgs(11000)},
+  {id:"p8", name:"Everlight Photography", spec:"Wedding • Events", loc:"Bengaluru", rating:4.9, reviews:189, price:"₹22,000", verified:true, available:false,
+   cover:U("1606800052052-a08af7148866"), avatar:U("1534528741775-53994a69daeb"),
+   about:"Luxury wedding coverage with a documentary heart. Trusted by 500+ couples across India for their biggest day.",
+   portfolio:["1606800052052-a08af7148866","1465495976277-4387d4b0b4c6","1520854221256-17451cc331bf","1511285560929-80b456fea0bc","1519741497674-611481863552","1606216794074-735e91aa2c92","1438761681033-6461ffad8d80","1544005313-94ddf0286df2","1524504388940-b1c1722653e1"].map(U),
+   packages:pkgs(22000)}
+];
+
+const feed = [
+  {who:"Everlight Photography", av:U("1534528741775-53994a69daeb"), loc:"Taj Falaknuma, Hyderabad", img:U("1519741497674-611481863552"), caption:"Beautiful evening wedding celebration ✨ #capturomoments", likes:245, comments:18},
+  {who:"Golden Hour Films", av:U("1507003211169-0a1dd7228f2d"), loc:"Marina Beach, Chennai", img:U("1520854221256-17451cc331bf"), caption:"Chasing the golden hour with Anaya & Rohan 🌅", likes:512, comments:41},
+  {who:"Pixel Stories", av:U("1500648767791-00dcc994a43e"), loc:"Studio, Tirupati", img:U("1524504388940-b1c1722653e1"), caption:"Natural light portraits never go out of style.", likes:189, comments:12},
+  {who:"Moments Studio", av:U("1534528741775-53994a69daeb"), loc:"Bengaluru", img:U("1464349095431-e9a21285b5f3"), caption:"A first birthday to remember 🎂🎉", likes:301, comments:27},
+  {who:"Frame & Light", av:U("1438761681033-6461ffad8d80"), loc:"Hyderabad", img:U("1544005313-94ddf0286df2"), caption:"Editorial vibes for this month's cover shoot.", likes:428, comments:33},
+  {who:"Studio Noir", av:U("1500648767791-00dcc994a43e"), loc:"Hyderabad", img:U("1492684223066-81342ee5ff30"), caption:"Clean commercial set from last week's brand shoot.", likes:167, comments:8},
+];
+
+const bookingsData = [
+  {id:"CAP-2043", who:"Arjun Visuals", av:U("1507003211169-0a1dd7228f2d"), type:"Wedding Photography", date:"25 Sep 2026", time:"5:00 PM – 10:00 PM", status:"CONFIRMED", price:"₹35,500"},
+  {id:"CAP-1987", who:"Golden Hour Films", av:U("1507003211169-0a1dd7228f2d"), type:"Pre-Wedding Shoot", date:"12 Oct 2026", time:"6:00 AM – 9:00 AM", status:"CONFIRMED", price:"₹18,000"},
+  {id:"CAP-1820", who:"Pixel Stories", av:U("1500648767791-00dcc994a43e"), type:"Portrait Session", date:"02 Aug 2026", time:"11:00 AM – 1:00 PM", status:"COMPLETED", price:"₹8,500"},
+  {id:"CAP-1755", who:"Moments Studio", av:U("1534528741775-53994a69daeb"), type:"Birthday Event", date:"18 Jul 2026", time:"4:00 PM – 8:00 PM", status:"COMPLETED", price:"₹22,000"},
+  {id:"CAP-1699", who:"Studio Noir", av:U("1500648767791-00dcc994a43e"), type:"Product Shoot", date:"05 Jun 2026", time:"10:00 AM – 12:00 PM", status:"CANCELLED", price:"₹11,000"},
+];
+
+/* -------- Marketing page content -------- */
+document.getElementById('cat-strip').innerHTML = categories.map(c=>`
+  <div class="cat-chip" onclick="openAuth('login')"><img src="${c.img}" loading="lazy"><div class="label">${c.emoji} ${c.name}</div></div>
+`).join('');
+
+const showcase = [
+  ["1519741497674-611481863552","Wedding"], ["1520854221256-17451cc331bf","Pre-Wedding"],
+  ["1524504388940-b1c1722653e1","Portrait"], ["1606216794074-735e91aa2c92","Wedding"],
+  ["1544005313-94ddf0286df2","Fashion"], ["1522673607200-164d1b6ce486","Maternity"],
+  ["1464349095431-e9a21285b5f3","Birthday"], ["1492684223066-81342ee5ff30","Corporate"],
+  ["1511285560929-80b456fea0bc","Pre-Wedding"]
+];
+document.getElementById('showcase-grid').innerHTML = showcase.map(([i,tag])=>`
+  <div class="showcase-item"><span class="tag">${tag}</span><img src="${U(i)}" loading="lazy"></div>
+`).join('');
+
+document.getElementById('creator-grid').innerHTML = photographers.slice(0,4).map(p=>`
+  <div class="creator-card" onclick="openAuth('login')">
+    <div class="cover" style="background-image:url('${p.cover}')"></div>
+    <div class="body">
+      <div class="name">${p.name} ${p.verified?'<span class="badge-verified">✓ verified</span>':''}</div>
+      <div class="spec">${p.spec}</div>
+      <div class="row"><span>⭐ ${p.rating} (${p.reviews})</span><span>${p.loc}</span></div>
+      <div class="row" style="margin-top:8px"><span style="color:var(--accent);font-weight:600">${p.price}</span><span>from</span></div>
+    </div>
+  </div>
+`).join('');
+
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* -------- Hero phone preview (static, non-interactive home screenshot) -------- */
+document.getElementById('hero-preview').innerHTML = `
+  <div style="display:flex;align-items:center;padding:36px 20px 0;gap:12px">
+    <div><div style="font-size:18px;font-weight:700">Good morning, Aarav 👋</div><div style="font-size:12px;color:var(--text-secondary);margin-top:2px">Let's capture something beautiful</div></div>
+    <div style="width:38px;height:38px;border-radius:50%;background:var(--surface-variant);display:flex;align-items:center;justify-content:center;font-size:15px;margin-left:auto">👤</div>
+  </div>
+  <div style="margin:16px 20px 0;height:44px;background:var(--surface-variant);border-radius:22px;display:flex;align-items:center;padding:0 16px;font-size:12px;color:var(--text-hint)">🔍 Search photographers, events...</div>
+  <div style="display:flex;gap:12px;overflow:hidden;padding:14px 20px 0">${categories.slice(0,5).map(c=>`
+    <div style="flex:0 0 auto;width:60px;text-align:center"><div style="width:52px;height:52px;border-radius:16px;background-image:url('${c.img}');background-size:cover;background-position:center;margin:0 auto 6px;border:1px solid var(--border)"></div><div style="font-size:10px;color:var(--text-secondary)">${c.name}</div></div>`).join('')}</div>
+  <div style="font-weight:600;font-size:13px;padding:14px 20px 6px">Photographers near you</div>
+  ${photographers.slice(0,3).map(p=>`
+    <div style="display:flex;gap:12px;margin:0 20px 10px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:8px">
+      <div style="width:56px;height:56px;border-radius:12px;background-image:url('${p.cover}');background-size:cover;background-position:center;flex-shrink:0"></div>
+      <div><div style="font-size:12.5px;font-weight:600">${p.name}</div><div style="font-size:10px;color:var(--text-secondary)">${p.spec}</div>
+      <div style="font-size:10px;color:var(--text-hint);margin-top:2px">⭐ ${p.rating} · ${p.loc}</div></div>
+    </div>`).join('')}
+`;
+
+/* ==================== AUTH / APP STATE ==================== */
+let authMode = "register", userName = "Aarav", signedIn = false;
+
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1800); }
+
+/* ==================== NOTIFICATIONS ==================== */
+let notifications = [];
+let notifTimers = [];
+
+function requestNotifPermission(){
+  if('Notification' in window && Notification.permission === 'default'){
+    Notification.requestPermission();
+  }
+}
+function pushNotification(icon, title, msg, {silent=false} = {}){
+  const n = { id: Date.now()+Math.random(), icon, title, msg, time: 'Just now', read:false };
+  notifications.unshift(n);
+  if(notifications.length > 30) notifications.pop();
+  renderNotifList();
+  if(!silent) toast(title);
+  if('Notification' in window && Notification.permission === 'granted'){
+    try{ new Notification(title, { body: msg, tag: 'capturo-'+n.id }); }catch(e){}
+  }
+}
+function renderNotifList(){
+  const unread = notifications.filter(n=>!n.read).length;
+  const badge = document.getElementById('notif-badge');
+  if(badge){ badge.textContent = unread > 9 ? '9+' : unread; badge.classList.toggle('hide', unread===0); }
+  const list = document.getElementById('notif-list');
+  if(!list) return;
+  list.innerHTML = notifications.length ? notifications.map(n=>`
+    <div class="notif-item ${n.read?'':'unread'}">
+      <div class="ic">${n.icon}</div>
+      <div class="body"><div class="title">${n.title}</div><div class="msg">${n.msg}</div><div class="time">${n.time}</div></div>
+    </div>`).join('') : `<div class="notif-empty">You're all caught up — no notifications yet.</div>`;
+}
+function toggleNotifDropdown(){
+  const dd = document.getElementById('notif-dropdown');
+  dd.classList.toggle('show');
+  if(dd.classList.contains('show')){
+    notifications.forEach(n=> n.read = true);
+    renderNotifList();
+  }
+}
+function markAllRead(){ notifications.forEach(n=> n.read = true); renderNotifList(); }
+document.addEventListener('click', (e)=>{
+  const wrap = document.querySelector('.notif-wrap');
+  if(wrap && !wrap.contains(e.target)) document.getElementById('notif-dropdown').classList.remove('show');
+});
+function clearNotifTimers(){ notifTimers.forEach(t=>clearTimeout(t)); notifTimers = []; }
+function scheduleSimulatedActivity(){
+  clearNotifTimers();
+  notifTimers.push(setTimeout(()=>{
+    const p = photographers[4];
+    pushNotification('💬', `New message from ${p.name}`, `"Looking forward to your shoot — let's confirm the location."`);
+  }, 15000));
+  notifTimers.push(setTimeout(()=>{
+    pushNotification('📦', 'Gallery delivered', `Pixel Stories uploaded your edited photos from Portrait Session.`);
+  }, 32000));
+}
+
+function openAuth(mode){
+  authMode = mode;
+  applyAuthMode();
+  document.getElementById('auth-overlay').classList.add('show');
+}
+function closeAuth(){ document.getElementById('auth-overlay').classList.remove('show'); }
+function toggleAuthMode(){ authMode = authMode==="register" ? "login" : "register"; applyAuthMode(); }
+function applyAuthMode(){
+  const isReg = authMode==="register";
+  document.getElementById('auth-title').textContent = isReg ? "Create your account" : "Welcome back";
+  document.getElementById('auth-sub').textContent = isReg ? "Sign up to book and cherish your moments" : "Log in to continue booking your moments";
+  document.getElementById('auth-cta').textContent = isReg ? "Create Account" : "Log In";
+  document.getElementById('auth-toggle').textContent = isReg ? "Already have an account? Log in" : "Don't have an account? Sign up";
+  document.getElementById('auth-name').style.display = isReg ? 'block' : 'none';
+  document.getElementById('auth-confirm').style.display = isReg ? 'block' : 'none';
+}
+function doSignIn(){
+  const nameField = document.getElementById('auth-name');
+  if(nameField.value.trim()) userName = nameField.value.trim().split(' ')[0];
+  signedIn = true;
+  closeAuth();
+  enterAppShell();
+}
+function enterAppShell(){
+  document.getElementById('site').classList.add('hidden');
+  document.getElementById('app-shell').classList.add('show');
+  window.scrollTo(0,0);
+  renderHome(); renderDiscover(); renderTry(); renderBookings('CONFIRMED'); renderProfile(); renderNotifList();
+  switchTab('home');
+  requestNotifPermission();
+  pushNotification('👋', `Welcome back, ${userName}`, 'You have 2 upcoming bookings this month.', {silent:true});
+  scheduleSimulatedActivity();
+}
+function goToSite(){
+  document.getElementById('app-shell').classList.remove('show');
+  document.getElementById('site').classList.remove('hidden');
+  document.getElementById('profile-dropdown').classList.remove('show');
+  document.getElementById('notif-dropdown').classList.remove('show');
+  window.scrollTo(0,0);
+}
+function signOut(){ signedIn = false; clearNotifTimers(); goToSite(); toast('Signed out'); }
+
+function toggleProfileMenu(){ document.getElementById('profile-dropdown').classList.toggle('show'); }
+document.addEventListener('click', (e)=>{
+  const wrap = document.querySelector('.app-avatar-wrap');
+  if(wrap && !wrap.contains(e.target)) document.getElementById('profile-dropdown').classList.remove('show');
+});
+
+/* -------- Tabs -------- */
+function switchTab(tab){
+  document.querySelectorAll('.app-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+  document.querySelectorAll('.applink, .app-mobile-nav .nav-item').forEach(n=> n.classList.toggle('active', n.dataset.tab===tab));
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+/* -------- Home -------- */
+function renderHome(){
+  const host = document.getElementById('tab-home');
+  host.innerHTML = `
+    <div class="page-title-row">
+      <div><h1>Good morning, ${userName} 👋</h1><p>Let's capture something beautiful.</p></div>
+    </div>
+    <div class="home-hero" style="background-image:url('${photographers[2].cover}')" onclick="switchTab('try')">
+      <div class="eyebrow" style="margin-bottom:8px">✨ Try a Photographer</div>
+      <h2>Swipe to discover styles you'll love</h2>
+      <p>Not sure who to book? Swipe through curated photographers matched to your taste.</p>
+      <button class="btn btn-primary cta" onclick="event.stopPropagation();switchTab('try')">Start Swiping</button>
+    </div>
+    <h2 class="app-section-title">What are you booking?</h2>
+    <div class="app-cat-grid">${categories.map(c=>`
+      <div class="app-cat-card" onclick="toast('Filtering: ${c.name}')"><img src="${c.img}"><div class="label">${c.emoji} ${c.name}</div></div>
+    `).join('')}</div>
+    <h2 class="app-section-title">Photographers near Madanapalle</h2>
+    <div class="app-photog-grid">${photographers.map(p=>appPhotogCard(p)).join('')}</div>
+  `;
+}
+function appPhotogCard(p){
+  return `
+    <div class="app-photog-card" onclick="openDetail('${p.id}')">
+      <div class="cover" style="background-image:url('${p.cover}')"></div>
+      <div class="body">
+        <div class="name">${p.name} ${p.verified?'<span class="badge-verified">✓</span>':''}</div>
+        <div class="spec">${p.spec}</div>
+        <div class="row"><span>⭐ ${p.rating} (${p.reviews})</span><span>${p.loc}</span></div>
+        <div class="row" style="margin-top:8px"><span style="color:var(--accent);font-weight:600">${p.price}</span><span>${p.available?'Available':'Booked'}</span></div>
+      </div>
+    </div>`;
+}
+
+/* -------- Discover -------- */
+function renderDiscover(){
+  const host = document.getElementById('tab-discover');
+  host.innerHTML = `
+    <div class="page-title-row"><div><h1>Discover</h1><p>Fresh work from Capturo creators.</p></div></div>
+    <div class="discover-grid">${feed.map(f=>`
+      <div class="discover-card">
+        <div class="post-top"><div class="av" style="background-image:url('${f.av}')"></div><div><div class="who">${f.who}</div><div class="loc">${f.loc}</div></div></div>
+        <img src="${f.img}" loading="lazy">
+        <div class="foot">❤️ ${f.likes}   💬 ${f.comments}<div class="caption">${f.caption}</div></div>
+      </div>`).join('')}</div>
+  `;
+}
+
+/* -------- Try (swipe) -------- */
+let tryIndex = 0;
+function renderTry(){
+  const host = document.getElementById('tab-try');
+  host.innerHTML = `
+    <div class="page-title-row"><div><h1>Try a Photographer</h1><p>Swipe through styles to find your match.</p></div></div>
+    <div class="try-panel" id="try-panel"></div>
+  `;
+  paintSwipe();
+}
+function paintSwipe(){
+  const body = document.getElementById('try-panel');
+  const p = photographers[tryIndex % photographers.length];
+  body.innerHTML = `
+    <div class="swipe-card" style="background-image:url('${p.cover}')">
+      <div class="grad"></div>
+      <div class="txt"><h3>${p.name}</h3><p>${p.spec} · ${p.loc}</p></div>
+    </div>
+    <div class="swipe-actions">
+      <button class="no" onclick="swipeNext()">✕</button>
+      <button class="yes" onclick="swipeLike('${p.id}')">♥</button>
+    </div>`;
+}
+function swipeNext(){ tryIndex++; paintSwipe(); }
+function swipeLike(id){
+  const p = photographers.find(x=>x.id===id);
+  pushNotification('❤️', 'Saved to favourites', `${p.name} was added to your favourites.`);
+  swipeNext();
+}
+
+/* -------- Bookings -------- */
+function renderBookings(activeStatus){
+  const host = document.getElementById('tab-bookings');
+  const list = bookingsData.filter(b=>b.status===activeStatus);
+  const tabs = [["Upcoming","CONFIRMED"],["Completed","COMPLETED"],["Cancelled","CANCELLED"]];
+  host.innerHTML = `
+    <div class="page-title-row"><div><h1>My Bookings</h1><p>Track upcoming, completed and cancelled shoots.</p></div></div>
+    <div class="bk-tabs-row">${tabs.map(([label,val])=>`<div class="bk-tab ${val===activeStatus?'active':''}" onclick="renderBookings('${val}')">${label}</div>`).join('')}</div>
+    ${list.length ? `<div class="bk-grid">${list.map(b=>`
+      <div class="bk-card">
+        <div class="top"><div class="av" style="background-image:url('${b.av}')"></div><div><div class="who">${b.who}</div><div class="type">${b.type}</div></div></div>
+        <div class="meta">📅 ${b.date}</div>
+        <div class="meta">⏰ ${b.time}</div>
+        <span class="status-pill status-${b.status}">${b.status}</span>
+        <span class="bk-price">${b.price}</span>
+      </div>`).join('')}</div>` : `<div style="text-align:center;color:var(--text-hint);margin-top:60px;font-size:14px">No bookings here yet.</div>`}
+  `;
+}
+
+/* -------- Profile -------- */
+function renderProfile(){
+  const host = document.getElementById('tab-profile');
+  const items = ["✏️ Edit Profile","💳 Payments & Payouts","🔔 Notifications","⚙️ Settings","❓ Help & Support"];
+  host.innerHTML = `
+    <div class="page-title-row"><div><h1>Profile</h1><p>Manage your account and preferences.</p></div></div>
+    <div class="profile-grid">
+      <div class="profile-summary">
+        <div class="av">👤</div>
+        <div class="name">${userName} Mehta</div>
+        <div class="email">${userName.toLowerCase()}.mehta@email.com</div>
+        <button class="btn btn-primary" style="width:100%;margin-bottom:16px" onclick="toast('Switching to Photographer mode…')">Switch to Photographer</button>
+        <div class="profile-stats">
+          <div><b>${bookingsData.length}</b><span>BOOKINGS</span></div>
+          <div><b>4.9</b><span>RATING</span></div>
+          <div><b>2026</b><span>MEMBER SINCE</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="menu-list">${items.map(i=>`<div class="menu-item" onclick="toast('${i.split(' ').slice(1).join(' ')}')">${i}</div>`).join('')}</div>
+        <button class="btn-outline-full" onclick="signOut()">Log Out</button>
+      </div>
+    </div>
+  `;
+}
+
+/* -------- Detail / booking -------- */
+let selectedPkg = 0;
+function openDetail(id){
+  const p = photographers.find(x=>x.id===id);
+  selectedPkg = 0;
+  const host = document.getElementById('tab-detail');
+  host.innerHTML = `
+    <div class="detail-hero-web" style="background-image:url('${p.cover}')">
+      <div class="detail-back-web" onclick="switchTab('home')">←</div>
+      <div class="info">
+        <h1>${p.name} ${p.verified?'✓':''}</h1>
+        <div class="row">⭐ ${p.rating} (${p.reviews} reviews) · ${p.loc}</div>
+      </div>
+    </div>
+    <div class="detail-grid">
+      <div class="detail-body">
+        <p class="about">${p.about}</p>
+        <h2 class="app-section-title">Portfolio</h2>
+        <div class="portfolio-grid">${p.portfolio.map(u=>`<div class="p" style="background-image:url('${u}')"></div>`).join('')}</div>
+      </div>
+      <div class="booking-box">
+        <h2 class="app-section-title" style="margin-bottom:14px">Choose a package</h2>
+        <div id="pkg-list">${p.packages.map((pk,i)=>pkgCard(pk,i)).join('')}</div>
+        <button class="btn btn-primary" style="width:100%;margin-top:6px" onclick="confirmBooking('${p.id}')">Book Now</button>
+      </div>
+    </div>
+  `;
+  document.querySelectorAll('.app-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.applink, .app-mobile-nav .nav-item').forEach(n=> n.classList.remove('active'));
+  host.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function pkgCard(pk,i){
+  return `
+    <div class="pkg-card ${i===selectedPkg?'selected':''}" onclick="selectPkg(${i})">
+      <div class="top"><span class="n">${pk.name}</span><span class="p">${pk.price}</span></div>
+      <ul>${pk.features.map(f=>`<li>${f}</li>`).join('')}</ul>
+    </div>`;
+}
+function selectPkg(i){
+  selectedPkg = i;
+  document.querySelectorAll('.pkg-card').forEach((c,idx)=> c.classList.toggle('selected', idx===i));
+}
+function confirmBooking(id){
+  const p = photographers.find(x=>x.id===id);
+  const pkg = p.packages[selectedPkg];
+  switchTab('bookings');
+  pushNotification('📅', 'Booking request sent', `${p.name} — ${pkg.name} package (${pkg.price}). Waiting for confirmation.`);
+  setTimeout(()=>{
+    pushNotification('✅', 'Booking confirmed!', `${p.name} accepted your ${pkg.name} package booking.`);
+  }, 5000);
+  setTimeout(()=>{
+    pushNotification('💳', 'Payment successful', `${pkg.price} paid for your booking with ${p.name}.`);
+  }, 8000);
+}
+</script>
+</body>
+</html>
